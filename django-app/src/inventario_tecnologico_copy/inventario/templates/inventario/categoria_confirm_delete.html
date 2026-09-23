@@ -1,0 +1,57 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Eliminar Categoría - {{ object.nombre }}{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-trash-alt text-danger"></i> Eliminar Categoría</h1>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 mx-auto">
+        <div class="card border-danger">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> Confirmación de Eliminación</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger">
+                    <h5><i class="fas fa-exclamation-circle"></i> ¡Advertencia!</h5>
+                    <p class="mb-0">
+                        Esta acción <strong>NO</strong> se puede deshacer.
+                        Todos los datos asociados se eliminarán permanentemente.
+                    </p>
+                </div>
+
+                <h5 class="mb-3">¿Está seguro de que desea eliminar la siguiente categoría?</h5>
+
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Código:</strong> {{ object.codigo }}</p>
+                                <p><strong>Nombre:</strong> {{ object.nombre }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Descripción:</strong> {{ object.descripcion|default:"N/A" }}</p>
+                                <p><strong>Estado:</strong> {% if object.activa %}Activa{% else %}Inactiva{% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form method="post" class="mt-4">
+                    {% csrf_token %}
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'inventario:categoria_list' %}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Cancelar
+                        </a>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Sí, Eliminar Categoría
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

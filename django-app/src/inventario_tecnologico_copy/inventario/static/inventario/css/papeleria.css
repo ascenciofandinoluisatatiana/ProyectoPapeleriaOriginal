@@ -1,0 +1,3893 @@
+/* =========================================================
+   PAPELERÍA - IDENTIDAD VISUAL
+   ========================================================= */
+
+:root {
+    --rosa-principal: #e8a0bf;
+    --rosa-claro: #fce4ec;
+    --rosa-suave: #fff5fa;
+    --rosa-fuerte: #d86a9b;
+
+    --lavanda: #eee7f8;
+    --crema: #fffaf5;
+
+    --texto-principal: #4a3b43;
+    --texto-secundario: #806d77;
+
+    --blanco: #ffffff;
+    --borde: #f1d6e1;
+
+    --sombra-suave: 0 8px 25px rgba(180, 111, 145, 0.10);
+    --sombra-hover: 0 12px 30px rgba(180, 111, 145, 0.18);
+
+    --radio: 18px;
+    --radio-pequeno: 12px;
+}
+
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+   ========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--rosa-suave);
+    color: var(--texto-principal);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TEXTOS
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--texto-principal);
+    font-weight: 700;
+}
+
+p {
+    color: var(--texto-secundario);
+}
+
+
+/* =========================================================
+   ENLACES
+   ========================================================= */
+
+a {
+    color: var(--rosa-fuerte);
+    text-decoration: none;
+}
+
+a:hover {
+    color: #b84f7d;
+}
+
+
+/* =========================================================
+   CONTENEDORES
+   ========================================================= */
+
+.container,
+.container-fluid {
+    position: relative;
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.card {
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-suave);
+    background: var(--blanco);
+    overflow: hidden;
+}
+
+.card:hover {
+    box-shadow: var(--sombra-hover);
+    transition: 0.25s ease;
+}
+
+.card-header {
+    background: var(--rosa-claro);
+    border-bottom: 1px solid var(--borde);
+    color: var(--texto-principal);
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn {
+    border-radius: var(--radio-pequeno);
+    font-weight: 600;
+    padding: 0.55rem 1rem;
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: var(--rosa-fuerte);
+    border-color: var(--rosa-fuerte);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #c95b8d;
+    border-color: #c95b8d;
+}
+
+.btn-success {
+    background: #a8c9a1;
+    border-color: #a8c9a1;
+}
+
+.btn-danger {
+    background: #d9899d;
+    border-color: #d9899d;
+}
+
+.btn-warning {
+    background: #e8c985;
+    border-color: #e8c985;
+    color: #4a3b43;
+}
+
+.btn-light {
+    background: var(--rosa-claro);
+    border-color: var(--borde);
+    color: var(--texto-principal);
+}
+
+
+/* =========================================================
+   FORMULARIOS
+   ========================================================= */
+
+.form-control,
+.form-select {
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-pequeno);
+    padding: 0.7rem 0.9rem;
+    color: var(--texto-principal);
+    background: #fff;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--rosa-principal);
+    box-shadow: 0 0 0 0.2rem rgba(232, 160, 191, 0.20);
+}
+
+
+/* =========================================================
+   TABLAS
+   ========================================================= */
+
+.table {
+    background: var(--blanco);
+    border-radius: var(--radio);
+    overflow: hidden;
+}
+
+.table thead th {
+    background: var(--rosa-claro);
+    color: var(--texto-principal);
+    border-bottom: 2px solid var(--borde);
+    font-weight: 700;
+}
+
+.table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background: #fff8fb;
+}
+
+
+/* =========================================================
+   BADGES
+   ========================================================= */
+
+.badge {
+    border-radius: 999px;
+    padding: 0.45em 0.75em;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ALERTAS
+   ========================================================= */
+
+.alert {
+    border-radius: var(--radio-pequeno);
+    border: none;
+    box-shadow: var(--sombra-suave);
+}
+
+
+/* =========================================================
+   PAGINACIÓN
+   ========================================================= */
+
+.page-link {
+    color: var(--rosa-fuerte);
+    border-color: var(--borde);
+}
+
+.page-link:hover {
+    background: var(--rosa-claro);
+    color: var(--rosa-fuerte);
+}
+
+.page-item.active .page-link {
+    background: var(--rosa-fuerte);
+    border-color: var(--rosa-fuerte);
+}
+
+
+/* =========================================================
+   MODALES
+   ========================================================= */
+
+.modal-content {
+    border: none;
+    border-radius: var(--radio);
+    box-shadow: 0 20px 50px rgba(90, 50, 70, 0.18);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: var(--rosa-claro);
+    border-bottom: 1px solid var(--borde);
+}
+
+
+/* =========================================================
+   BOTÓN DE CIERRE
+   ========================================================= */
+
+.btn-close:focus {
+    box-shadow: 0 0 0 0.2rem rgba(232, 160, 191, 0.20);
+}
+
+
+/* =========================================================
+   SELECCIÓN DE TEXTO
+   ========================================================= */
+
+::selection {
+    background: var(--rosa-principal);
+    color: white;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--rosa-suave);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--rosa-principal);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--rosa-fuerte);
+}
+
+
+/* =========================================================
+   UTILIDADES DE PAPELERÍA
+   ========================================================= */
+
+.papeleria-card {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-suave);
+    padding: 1.5rem;
+}
+
+.papeleria-title {
+    color: var(--texto-principal);
+    font-weight: 700;
+}
+
+.papeleria-subtitle {
+    color: var(--texto-secundario);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .btn {
+        width: auto;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    h2 {
+        font-size: 1.45rem;
+    }
+}
+
+/* =========================================================
+   NAVBAR - PAPELERÍA
+   ========================================================= */
+
+.papeleria-navbar {
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--borde);
+    box-shadow: 0 5px 20px rgba(180, 111, 145, 0.08);
+    min-height: 78px;
+    position: relative;
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   MARCA
+   ========================================================= */
+
+.papeleria-brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--texto-principal) !important;
+    padding: 7px 15px 7px 0;
+    margin-right: 25px;
+}
+
+.papeleria-brand:hover {
+    color: var(--rosa-fuerte) !important;
+}
+
+.papeleria-brand strong {
+    display: block;
+    font-size: 1.15rem;
+    line-height: 1.1;
+    letter-spacing: 0.2px;
+}
+
+.papeleria-brand small {
+    display: block;
+    color: var(--texto-secundario);
+    font-size: 0.68rem;
+    font-weight: 500;
+    margin-top: 3px;
+}
+
+.brand-icon {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: var(--rosa-claro);
+    color: var(--rosa-fuerte);
+    font-size: 1.1rem;
+}
+
+
+/* =========================================================
+   MENÚ PRINCIPAL
+   ========================================================= */
+
+.papeleria-menu {
+    gap: 4px;
+}
+
+.papeleria-menu .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--texto-secundario) !important;
+    font-size: 0.91rem;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 10px 12px !important;
+    transition: all 0.2s ease;
+}
+
+.papeleria-menu .nav-link i {
+    color: var(--rosa-principal);
+    font-size: 0.88rem;
+}
+
+.papeleria-menu .nav-link:hover {
+    background: var(--rosa-claro);
+    color: var(--rosa-fuerte) !important;
+    transform: translateY(-1px);
+}
+
+.papeleria-menu .nav-link:hover i {
+    color: var(--rosa-fuerte);
+}
+
+
+/* =========================================================
+   NUEVA CATEGORÍA
+   ========================================================= */
+
+.papeleria-new-category {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--rosa-fuerte);
+    border: none;
+    color: white !important;
+    border-radius: 12px;
+    padding: 9px 14px;
+    margin-right: 15px;
+    white-space: nowrap;
+    box-shadow: 0 5px 14px rgba(216, 106, 155, 0.20);
+}
+
+.papeleria-new-category:hover {
+    background: #c95b8d;
+    color: white !important;
+    box-shadow: 0 7px 18px rgba(216, 106, 155, 0.28);
+}
+
+
+/* =========================================================
+   USUARIO
+   ========================================================= */
+
+.papeleria-user {
+    margin-left: 5px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-principal) !important;
+    font-weight: 600;
+    border-radius: 14px;
+    padding: 6px 10px !important;
+}
+
+.user-profile:hover {
+    background: var(--rosa-claro);
+}
+
+.user-avatar {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--rosa-claro);
+    color: var(--rosa-fuerte);
+    border-radius: 50%;
+    font-size: 0.95rem;
+}
+
+.username {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   MENÚ DESPLEGABLE
+   ========================================================= */
+
+.papeleria-dropdown {
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    padding: 8px;
+    min-width: 220px;
+    box-shadow: 0 15px 35px rgba(100, 55, 75, 0.14);
+    margin-top: 8px !important;
+}
+
+.papeleria-dropdown .dropdown-header {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.papeleria-dropdown .dropdown-header small {
+    color: var(--texto-secundario);
+}
+
+.papeleria-dropdown .dropdown-header strong {
+    color: var(--texto-principal);
+}
+
+.papeleria-dropdown .dropdown-item {
+    border-radius: 10px;
+    padding: 9px 11px;
+    color: var(--texto-secundario);
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.papeleria-dropdown .dropdown-item i {
+    width: 20px;
+    color: var(--rosa-principal);
+}
+
+.papeleria-dropdown .dropdown-item:hover {
+    background: var(--rosa-claro);
+    color: var(--rosa-fuerte);
+}
+
+.papeleria-dropdown .dropdown-item:hover i {
+    color: var(--rosa-fuerte);
+}
+
+.papeleria-dropdown .logout-item:hover {
+    background: #fff0f3;
+    color: #c45d75;
+}
+
+
+/* =========================================================
+   LOGIN / REGISTRO
+   ========================================================= */
+
+.papeleria-auth {
+    align-items: center;
+    gap: 7px;
+}
+
+.papeleria-auth .nav-link {
+    color: var(--texto-secundario) !important;
+    font-weight: 600;
+    border-radius: 11px;
+    padding: 9px 12px !important;
+}
+
+.papeleria-auth .nav-link:hover {
+    background: var(--rosa-claro);
+    color: var(--rosa-fuerte) !important;
+}
+
+.papeleria-register {
+    background: var(--rosa-fuerte);
+    border: none;
+    color: white !important;
+    border-radius: 11px;
+    padding: 9px 14px;
+}
+
+.papeleria-register:hover {
+    background: #c95b8d;
+    color: white !important;
+}
+
+
+/* =========================================================
+   BOTÓN MÓVIL
+   ========================================================= */
+
+.papeleria-toggler {
+    border: 1px solid var(--borde);
+    border-radius: 10px;
+    padding: 7px 9px;
+}
+
+.papeleria-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(232, 160, 191, 0.20);
+}
+
+.papeleria-toggler .navbar-toggler-icon {
+    filter: invert(45%) sepia(20%) saturate(900%) hue-rotate(290deg);
+}
+
+
+/* =========================================================
+   NAVBAR EN PANTALLAS PEQUEÑAS
+   ========================================================= */
+
+@media (max-width: 1199px) {
+
+    .papeleria-brand {
+        margin-right: 10px;
+    }
+
+    .papeleria-menu {
+        margin-top: 10px;
+        gap: 2px;
+    }
+
+    .papeleria-new-category {
+        margin: 10px 0;
+    }
+
+    .papeleria-user {
+        margin: 5px 0 10px;
+    }
+
+    .papeleria-auth {
+        margin-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+
+@media (max-width: 576px) {
+
+    .papeleria-navbar {
+        min-height: 68px;
+    }
+
+    .papeleria-brand strong {
+        font-size: 1rem;
+    }
+
+    .papeleria-brand small {
+        font-size: 0.62rem;
+    }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
+    }
+
+    .papeleria-menu .nav-link {
+        padding: 10px !important;
+    }
+
+    .papeleria-new-category {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .papeleria-register {
+        display: block;
+        text-align: center;
+    }
+}
+
+/* =========================================================
+   DASHBOARD - ENCABEZADO
+   ========================================================= */
+
+.papeleria-welcome {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 190px;
+    padding: 35px 40px;
+    margin-bottom: 28px;
+    background: linear-gradient(
+        135deg,
+        #fff0f6 0%,
+        #fff8fb 55%,
+        #f4edfb 100%
+    );
+    border: 1px solid var(--borde);
+    border-radius: 24px;
+    box-shadow: var(--sombra-suave);
+}
+
+.welcome-text {
+    position: relative;
+    z-index: 2;
+}
+
+.welcome-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 11px;
+    margin-bottom: 10px;
+    background: white;
+    color: var(--rosa-fuerte);
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.papeleria-welcome h1 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+    letter-spacing: -0.4px;
+}
+
+.papeleria-welcome p {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.welcome-decoration {
+    position: relative;
+    width: 180px;
+    height: 150px;
+    flex-shrink: 0;
+}
+
+.welcome-decoration > i {
+    position: absolute;
+    top: 45px;
+    right: 45px;
+    z-index: 3;
+    font-size: 2rem;
+    color: var(--rosa-fuerte);
+}
+
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.circle-one {
+    width: 130px;
+    height: 130px;
+    right: 5px;
+    top: 10px;
+    background: rgba(232, 160, 191, 0.22);
+}
+
+.circle-two {
+    width: 80px;
+    height: 80px;
+    right: 85px;
+    bottom: 0;
+    background: rgba(205, 183, 233, 0.30);
+}
+
+
+/* =========================================================
+   ESTADÍSTICAS
+   ========================================================= */
+
+.dashboard-stats {
+    margin-bottom: 10px;
+}
+
+.dashboard-stat-card {
+    position: relative;
+    height: 100%;
+    min-height: 215px;
+    padding: 23px;
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    background: white;
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+    transition: all 0.25s ease;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-hover);
+}
+
+.dashboard-stat-card::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    right: -30px;
+    bottom: -35px;
+    opacity: 0.45;
+}
+
+.stat-pink::after {
+    background: #fce4ec;
+}
+
+.stat-lavender::after {
+    background: #eee7f8;
+}
+
+.stat-peach::after {
+    background: #fae3d5;
+}
+
+.stat-green::after {
+    background: #e0efdc;
+}
+
+.stat-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    font-size: 1.2rem;
+}
+
+.stat-pink .stat-icon {
+    background: #fce4ec;
+    color: #d86a9b;
+}
+
+.stat-lavender .stat-icon {
+    background: #eee7f8;
+    color: #8c72b5;
+}
+
+.stat-peach .stat-icon {
+    background: #fae3d5;
+    color: #c98461;
+}
+
+.stat-green .stat-icon {
+    background: #e1efdd;
+    color: #6e9a65;
+}
+
+.stat-decoration {
+    color: #ead5df;
+    font-size: 1rem;
+}
+
+.stat-number {
+    margin-top: 22px;
+    color: var(--texto-principal);
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 800;
+}
+
+.stat-money {
+    font-size: 1.65rem;
+}
+
+.stat-label {
+    margin-top: 8px;
+    color: var(--texto-secundario);
+    font-size: 0.88rem;
+    font-weight: 500;
+}
+
+.stat-link {
+    position: relative;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 18px;
+    color: var(--rosa-fuerte);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.stat-link:hover {
+    color: #b84f7d;
+}
+
+.stat-link-disabled {
+    color: var(--texto-secundario);
+}
+
+
+/* =========================================================
+   SECCIONES
+   ========================================================= */
+
+.dashboard-section {
+    margin-top: 28px;
+}
+
+.dashboard-panel {
+    height: 100%;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 20px 23px;
+    border-bottom: 1px solid #f5e6ed;
+}
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.panel-icon {
+    width: 43px;
+    height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+}
+
+.pink-icon {
+    background: #fce4ec;
+    color: #d86a9b;
+}
+
+.lavender-icon {
+    background: #eee7f8;
+    color: #8c72b5;
+}
+
+.peach-icon {
+    background: #fae3d5;
+    color: #c98461;
+}
+
+.yellow-icon {
+    background: #fff3d2;
+    color: #b18b35;
+}
+
+.panel-title h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 750;
+}
+
+.panel-title p {
+    margin: 3px 0 0;
+    font-size: 0.78rem;
+}
+
+.panel-body {
+    padding: 18px 23px;
+}
+
+
+/* =========================================================
+   TABLAS DEL DASHBOARD
+   ========================================================= */
+
+.papeleria-table {
+    margin: 0;
+}
+
+.papeleria-table thead th {
+    padding: 10px 8px;
+    background: #fff9fb;
+    border: none;
+    color: var(--texto-secundario);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+.papeleria-table tbody td {
+    padding: 13px 8px;
+    border-color: #f7ebf0;
+    vertical-align: middle;
+}
+
+.table-name {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-weight: 600;
+    color: var(--texto-principal);
+}
+
+.table-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.category-mini-icon {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: #fce4ec;
+    color: #d86a9b;
+    font-size: 0.75rem;
+}
+
+.soft-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    padding: 5px 10px;
+    background: #fce4ec;
+    color: #c35d89;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.lavender-badge {
+    background: #eee7f8;
+    color: #8065ad;
+}
+
+
+/* =========================================================
+   ACTIVIDAD
+   ========================================================= */
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f7ebf0;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fce4ec;
+    color: #d86a9b;
+    border-radius: 11px;
+}
+
+.maintenance-icon {
+    background: #fff3d2;
+    color: #b18b35;
+}
+
+.activity-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.activity-content strong {
+    color: var(--texto-principal);
+    font-size: 0.88rem;
+}
+
+.activity-content span {
+    color: var(--texto-secundario);
+    font-size: 0.82rem;
+}
+
+.activity-content span i {
+    margin: 0 4px;
+    color: var(--rosa-principal);
+    font-size: 0.7rem;
+}
+
+.activity-content small {
+    color: #aa9ca3;
+    font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   ACTIVIDAD RECIENTE
+   ========================================================= */
+
+.activity-full {
+    padding: 5px 23px 15px;
+}
+
+.recent-log {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 13px 0;
+    border-bottom: 1px solid #f7ebf0;
+}
+
+.recent-log:last-child {
+    border-bottom: none;
+}
+
+.recent-log-icon {
+    width: 37px;
+    height: 37px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #fce4ec;
+    color: #d86a9b;
+}
+
+.recent-log-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.recent-log-content > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
+
+.recent-log-content strong {
+    color: var(--texto-principal);
+    font-size: 0.84rem;
+}
+
+.recent-log-content span {
+    color: var(--texto-secundario);
+    font-size: 0.82rem;
+}
+
+.recent-log-content small {
+    color: #aa9ca3;
+    font-size: 0.72rem;
+}
+
+.action-badge {
+    padding: 5px 10px;
+    background: #eee7f8;
+    color: #8065ad;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.panel-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--rosa-fuerte);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.panel-action:hover {
+    color: #b84f7d;
+}
+
+
+/* =========================================================
+   ESTADOS VACÍOS
+   ========================================================= */
+
+.empty-message {
+    padding: 25px !important;
+    text-align: center;
+    color: #aa9ca3 !important;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 130px;
+    text-align: center;
+}
+
+.empty-state-icon {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 9px;
+    border-radius: 14px;
+    background: #fce4ec;
+    color: #d86a9b;
+}
+
+.success-empty {
+    background: #e1efdd;
+    color: #6e9a65;
+}
+
+.empty-state p {
+    margin: 0;
+    font-size: 0.82rem;
+}
+
+
+/* =========================================================
+   TÍTULOS DE SECCIONES
+   ========================================================= */
+
+.section-heading {
+    margin-bottom: 20px;
+}
+
+.section-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--rosa-fuerte);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+.section-heading h2,
+.reports-header h2 {
+    margin: 5px 0 4px;
+    font-size: 1.5rem;
+}
+
+.section-heading p,
+.reports-header p {
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   GRÁFICOS
+   ========================================================= */
+
+.chart-card {
+    height: 100%;
+    min-height: 450px;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+    box-shadow: var(--sombra-suave);
+    overflow: hidden;
+}
+
+.chart-header {
+    padding: 18px 21px;
+    border-bottom: 1px solid #f7ebf0;
+}
+
+.chart-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.chart-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.pink-chart-icon {
+    background: #fce4ec;
+    color: #d86a9b;
+}
+
+.lavender-chart-icon {
+    background: #eee7f8;
+    color: #8065ad;
+}
+
+.peach-chart-icon {
+    background: #fae3d5;
+    color: #c98461;
+}
+
+.green-chart-icon {
+    background: #e1efdd;
+    color: #6e9a65;
+}
+
+.chart-title h3 {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.chart-title span {
+    display: block;
+    margin-top: 3px;
+    color: var(--texto-secundario);
+    font-size: 0.75rem;
+}
+
+.chart-container {
+    position: relative;
+    height: 370px;
+    padding: 20px;
+}
+
+
+/* =========================================================
+   REPORTES
+   ========================================================= */
+
+.reports-section {
+    padding: 27px;
+    background: linear-gradient(
+        135deg,
+        #fff8fb,
+        #f9f4fc
+    );
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+    box-shadow: var(--sombra-suave);
+}
+
+.reports-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.reports-decoration {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 17px;
+    color: var(--rosa-principal);
+    font-size: 1.4rem;
+}
+
+.report-card {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 82px;
+    padding: 15px;
+    background: white;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    color: var(--texto-principal);
+    box-shadow: 0 4px 15px rgba(180, 111, 145, 0.06);
+    transition: all 0.22s ease;
+}
+
+.report-card:hover {
+    color: var(--texto-principal);
+    transform: translateY(-3px);
+    box-shadow: var(--sombra-hover);
+}
+
+.report-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+}
+
+.pdf-icon {
+    background: #fff0f2;
+    color: #d8758c;
+}
+
+.excel-icon {
+    background: #e5f1e1;
+    color: #6e9a65;
+}
+
+.report-card > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+}
+
+.report-card strong {
+    font-size: 0.82rem;
+}
+
+.report-card span {
+    color: var(--texto-secundario);
+    font-size: 0.7rem;
+}
+
+.report-arrow {
+    color: #d9c1cc;
+    font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   RESPONSIVE DASHBOARD
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .papeleria-welcome {
+        min-height: auto;
+        padding: 25px;
+    }
+
+    .welcome-decoration {
+        display: none;
+    }
+
+    .papeleria-welcome h1 {
+        font-size: 1.55rem;
+    }
+
+    .dashboard-stat-card {
+        min-height: 190px;
+    }
+
+    .chart-card {
+        min-height: 400px;
+    }
+
+    .chart-container {
+        height: 320px;
+    }
+
+    .reports-section {
+        padding: 20px;
+    }
+
+    .reports-decoration {
+        display: none;
+    }
+
+    .recent-log-content {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .action-badge {
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .papeleria-welcome {
+        padding: 20px;
+        border-radius: 18px;
+    }
+
+    .papeleria-welcome h1 {
+        font-size: 1.35rem;
+    }
+
+    .dashboard-stat-card {
+        min-height: 175px;
+    }
+
+    .stat-number {
+        font-size: 1.75rem;
+    }
+
+    .stat-money {
+        font-size: 1.4rem;
+    }
+
+    .panel-header {
+        padding: 16px;
+    }
+
+    .panel-body {
+        padding: 14px 16px;
+    }
+
+    .chart-header {
+        padding: 15px;
+    }
+
+    .chart-container {
+        height: 280px;
+        padding: 10px;
+    }
+
+    .reports-header {
+        margin-bottom: 15px;
+    }
+}
+
+/* =========================================================
+   PÁGINA DE ACTIVOS - MI PAPELERÍA
+   ========================================================= */
+
+.papeleria-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 28px;
+}
+
+.papeleria-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 13px;
+    margin-bottom: 10px;
+    border: 1px solid #f3d5e1;
+    border-radius: 999px;
+    background: #fff;
+    color: #d4779b;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.papeleria-page-title {
+    margin: 0;
+    color: #4f3b45;
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.title-decoration {
+    color: #e9a8c0;
+    margin-left: 5px;
+}
+
+.papeleria-page-subtitle {
+    margin: 7px 0 0;
+    color: #8a717c;
+    font-size: 0.95rem;
+}
+
+.papeleria-page-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.papeleria-btn-primary,
+.papeleria-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 17px;
+    border-radius: 13px;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.papeleria-btn-primary {
+    background: #d96f9a;
+    border: 1px solid #d96f9a;
+    color: #fff;
+    box-shadow: 0 7px 18px rgba(217, 111, 154, 0.20);
+}
+
+.papeleria-btn-primary:hover {
+    background: #c9618c;
+    border-color: #c9618c;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.papeleria-btn-secondary {
+    background: #fff;
+    border: 1px solid #efd4df;
+    color: #a65e7c;
+}
+
+.papeleria-btn-secondary:hover {
+    background: #fff5f9;
+    border-color: #e7b9cc;
+    color: #9b5573;
+}
+
+
+/* =========================================================
+   FILTROS
+   ========================================================= */
+
+.papeleria-filter-card,
+.papeleria-products-card {
+    border: 1px solid #f0dce5 !important;
+    border-radius: 20px !important;
+    background: #fff;
+    box-shadow: 0 8px 25px rgba(130, 83, 105, 0.06);
+    overflow: hidden;
+}
+
+.papeleria-filter-card .card-body,
+.papeleria-products-card .card-body {
+    padding: 24px;
+}
+
+.papeleria-section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.section-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: #f8dce7;
+    color: #d4779b;
+}
+
+.section-icon-pink {
+    background: #f9dfeb;
+    color: #d96f9a;
+}
+
+.papeleria-section-title h5 {
+    margin: 0;
+    color: #55414b;
+    font-size: 1rem;
+    font-weight: 750;
+}
+
+.papeleria-section-title small {
+    display: block;
+    margin-top: 3px;
+    color: #9a858e;
+    font-size: 0.82rem;
+}
+
+.papeleria-label {
+    margin-bottom: 7px;
+    color: #68535d;
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.papeleria-input-group {
+    position: relative;
+}
+
+.papeleria-input-group > i {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 14px;
+    color: #d78aa6;
+    transform: translateY(-50%);
+}
+
+.papeleria-input-group .form-control {
+    padding-left: 40px;
+}
+
+.papeleria-filter-card .form-control,
+.papeleria-filter-card .form-select {
+    min-height: 45px;
+    border: 1px solid #ecdce3;
+    border-radius: 12px;
+    background-color: #fffafd;
+    color: #5c4650;
+    box-shadow: none;
+}
+
+.papeleria-filter-card .form-control:focus,
+.papeleria-filter-card .form-select:focus {
+    border-color: #e4a4bc;
+    box-shadow: 0 0 0 3px rgba(233, 168, 192, 0.16);
+    background: #fff;
+}
+
+.papeleria-filter-card .form-control::placeholder {
+    color: #b49da7;
+}
+
+.papeleria-filter-btn {
+    min-height: 45px;
+    border: 0;
+    border-radius: 12px;
+    background: #e9a8c0;
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 5px 14px rgba(201, 125, 155, 0.15);
+    transition: all 0.2s ease;
+}
+
+.papeleria-filter-btn:hover {
+    background: #c97d9b;
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   CABECERA DE TABLA
+   ========================================================= */
+
+.papeleria-table-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.papeleria-count-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #fff0f5;
+    color: #c96e91;
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TABLA
+   ========================================================= */
+
+.papeleria-table-wrapper {
+    border: 1px solid #f1e0e6;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.papeleria-table {
+    margin-bottom: 0 !important;
+    color: #5c4650;
+}
+
+.papeleria-table thead th {
+    padding: 14px 16px;
+    border: 0 !important;
+    background: #fff5f9 !important;
+    color: #8c536c !important;
+    font-size: 0.76rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.papeleria-table tbody td {
+    padding: 15px 16px;
+    border-color: #f5e8ed;
+    vertical-align: middle;
+}
+
+.papeleria-table tbody tr {
+    transition: background-color 0.18s ease;
+}
+
+.papeleria-table tbody tr:hover {
+    background: #fffafd;
+}
+
+
+/* Producto */
+
+.product-code {
+    display: inline-flex;
+    padding: 6px 9px;
+    border-radius: 8px;
+    background: #f7edf2;
+    color: #8d6072;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.product-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 190px;
+}
+
+.product-icon {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 11px;
+    background: #f9dfea;
+    color: #d96f9a;
+}
+
+.product-name-cell strong {
+    display: block;
+    color: #54404a;
+    font-size: 0.9rem;
+}
+
+.product-name-cell small {
+    display: block;
+    margin-top: 2px;
+    color: #a18b94;
+    font-size: 0.75rem;
+}
+
+
+/* Categoría */
+
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f0eafa;
+    color: #7e69a7;
+    font-size: 0.76rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* Ubicación */
+
+.location-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #76616b;
+    font-size: 0.82rem;
+}
+
+.location-text i {
+    color: #d58aa5;
+}
+
+
+/* Estado */
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--status-color) 12%, white);
+    color: var(--status-color);
+    font-size: 0.76rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--status-color);
+}
+
+
+/* Botón Ver */
+
+.papeleria-view-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 11px;
+    border: 1px solid #f0cddd;
+    border-radius: 10px;
+    background: #fff7fb;
+    color: #c86c90;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.papeleria-view-btn:hover {
+    border-color: #dfa1ba;
+    background: #fce8f0;
+    color: #b95c80;
+}
+
+
+/* =========================================================
+   ESTADO VACÍO
+   ========================================================= */
+
+.papeleria-empty-state {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.empty-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: #fbe4ed;
+    color: #d4779b;
+    font-size: 1.5rem;
+}
+
+.papeleria-empty-state h5 {
+    margin-bottom: 7px;
+    color: #59434d;
+}
+
+.papeleria-empty-state p {
+    margin-bottom: 18px;
+    color: #9a858e;
+}
+
+
+/* =========================================================
+   PAGINACIÓN
+   ========================================================= */
+
+.papeleria-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #f2e3e9;
+}
+
+.pagination-info {
+    color: #9a858e;
+    font-size: 0.82rem;
+}
+
+.papeleria-pagination .page-link {
+    border: 1px solid #efd8e2;
+    color: #b96888;
+    background: #fff;
+    font-size: 0.8rem;
+}
+
+.papeleria-pagination .page-link:hover {
+    background: #fff3f7;
+    color: #a85b7b;
+}
+
+.papeleria-pagination .page-item.active .page-link {
+    border-color: #d982a2;
+    background: #d982a2;
+    color: #fff;
+}
+
+
+/* =========================================================
+   AJUSTE PEQUEÑO PARA PANTALLAS MEDIANAS
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .papeleria-page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .papeleria-page-actions {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   DETALLE DE PRODUCTO
+   ========================================================= */
+
+.papeleria-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 8px;
+    color: var(--rosa-oscuro);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.papeleria-card {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(92, 70, 80, 0.06);
+    overflow: hidden;
+}
+
+.papeleria-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--borde);
+    background: #fffafd;
+}
+
+.papeleria-card-header h3 {
+    margin: 0;
+    color: var(--texto);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.papeleria-card-header p {
+    margin: 3px 0 0;
+    color: #967f89;
+    font-size: 0.82rem;
+}
+
+.papeleria-card-icon,
+.papeleria-mini-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.papeleria-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    font-size: 1rem;
+}
+
+.papeleria-card-icon.pink,
+.papeleria-mini-icon.pink {
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+}
+
+.papeleria-card-icon.mint,
+.papeleria-mini-icon.mint {
+    background: var(--menta);
+    color: #679f91;
+}
+
+.papeleria-card-icon.lavender,
+.papeleria-mini-icon.lavender {
+    background: var(--lavanda);
+    color: #8172aa;
+}
+
+.papeleria-card-icon.peach {
+    background: var(--durazno);
+    color: #b67861;
+}
+
+.papeleria-card-body {
+    padding: 24px;
+}
+
+
+/* INFORMACIÓN DEL PRODUCTO */
+
+.papeleria-info-item {
+    padding: 13px 0;
+    border-bottom: 1px dashed #f0e1e7;
+}
+
+.papeleria-info-item:first-child {
+    padding-top: 0;
+}
+
+.papeleria-info-item:last-child {
+    border-bottom: none;
+}
+
+.papeleria-info-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #987f8a;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.papeleria-info-label i {
+    width: 18px;
+    margin-right: 4px;
+    color: var(--rosa-oscuro);
+}
+
+.papeleria-info-item strong {
+    display: block;
+    color: var(--texto);
+    font-size: 0.95rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+
+/* ESTADO */
+
+.papeleria-status-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 22px;
+    padding: 15px 17px;
+    background: #fff7fa;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+}
+
+.papeleria-status-box .papeleria-info-label {
+    margin-bottom: 3px;
+}
+
+.papeleria-status-box strong {
+    color: var(--texto);
+    font-size: 0.92rem;
+}
+
+.papeleria-status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--estado-color) 13%, white);
+    color: var(--estado-color);
+    font-size: 0.78rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* DESCRIPCIÓN */
+
+.papeleria-description {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borde);
+}
+
+.papeleria-description p {
+    margin: 8px 0 0;
+    color: #715d66;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+
+/* INFORMACIÓN FINANCIERA */
+
+.papeleria-finance-box {
+    padding: 18px;
+    background: #fffbfd;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+}
+
+.papeleria-finance-box span {
+    display: block;
+    margin-bottom: 8px;
+    color: #987f8a;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.papeleria-finance-box span i {
+    margin-right: 5px;
+    color: var(--rosa-oscuro);
+}
+
+.papeleria-finance-box strong {
+    display: block;
+    color: var(--texto);
+    font-size: 1rem;
+}
+
+.papeleria-finance-box .papeleria-price {
+    color: #719c8e;
+    font-size: 1.15rem;
+}
+
+
+/* FOTO */
+
+.papeleria-photo {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background:
+        radial-gradient(circle at top left, #fff0f6 0%, transparent 45%),
+        #fffafd;
+}
+
+.papeleria-photo img {
+    display: block;
+    width: 100%;
+    max-height: 360px;
+    object-fit: contain;
+    border-radius: 16px;
+}
+
+.papeleria-no-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+    text-align: center;
+}
+
+.papeleria-no-photo-icon {
+    width: 76px;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+    border-radius: 22px;
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+    font-size: 1.8rem;
+}
+
+.papeleria-no-photo strong {
+    color: var(--texto);
+    font-size: 0.95rem;
+}
+
+.papeleria-no-photo span {
+    max-width: 230px;
+    margin-top: 5px;
+    color: #9b858e;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+
+/* TARJETAS PEQUEÑAS */
+
+.papeleria-mini-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--borde);
+    background: #fffafd;
+}
+
+.papeleria-mini-header strong {
+    color: var(--texto);
+    font-size: 0.9rem;
+}
+
+.papeleria-mini-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    font-size: 0.8rem;
+}
+
+.papeleria-mini-body {
+    padding: 18px;
+    color: #6e5962;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.papeleria-system-info {
+    padding: 5px 18px;
+}
+
+.papeleria-system-info > div {
+    padding: 14px 0;
+    border-bottom: 1px dashed #f0e1e7;
+}
+
+.papeleria-system-info > div:last-child {
+    border-bottom: none;
+}
+
+.papeleria-system-info span {
+    display: block;
+    margin-bottom: 4px;
+    color: #9b858e;
+    font-size: 0.76rem;
+}
+
+.papeleria-system-info strong {
+    display: block;
+    color: var(--texto);
+    font-size: 0.85rem;
+}
+
+
+/* TABLAS */
+
+.papeleria-table-wrapper {
+    width: 100%;
+}
+
+.papeleria-table {
+    margin-bottom: 0;
+    min-width: 650px;
+}
+
+.papeleria-table thead th {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--borde);
+    color: #987f8a;
+    background: #fffafd;
+    font-size: 0.76rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.papeleria-table tbody td {
+    padding: 14px;
+    border-color: #f4e8ed;
+    color: #6e5962;
+    font-size: 0.84rem;
+}
+
+.papeleria-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.papeleria-table tbody tr:hover {
+    background: #fffafd;
+}
+
+.movement-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--menta);
+    color: #679f91;
+}
+
+.papeleria-soft-badge {
+    display: inline-flex;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+    font-size: 0.75rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* ESTADO VACÍO */
+
+.papeleria-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    padding: 25px;
+    text-align: center;
+}
+
+.papeleria-empty-state > i {
+    margin-bottom: 12px;
+    color: #d9bcc8;
+    font-size: 2rem;
+}
+
+.papeleria-empty-state strong {
+    color: var(--texto);
+    font-size: 0.9rem;
+}
+
+.papeleria-empty-state span {
+    margin-top: 5px;
+    color: #9b858e;
+    font-size: 0.78rem;
+}
+
+
+/* BOTONES */
+
+.papeleria-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 42px;
+    padding: 9px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.papeleria-btn-primary {
+    background: var(--rosa-principal);
+    border: 1px solid var(--rosa-principal);
+    color: white;
+}
+
+.papeleria-btn-primary:hover {
+    background: var(--rosa-oscuro);
+    border-color: var(--rosa-oscuro);
+    color: white;
+    transform: translateY(-1px);
+}
+
+.papeleria-btn-danger {
+    background: #fff0f1;
+    border: 1px solid #f1ccd0;
+    color: #c87880;
+}
+
+.papeleria-btn-danger:hover {
+    background: #f9dfe2;
+    color: #ad626b;
+}
+
+.papeleria-btn-light {
+    background: white;
+    border: 1px solid var(--borde);
+    color: var(--texto);
+}
+
+.papeleria-btn-light:hover {
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+    border-color: #e8c5d2;
+}
+
+.papeleria-back {
+    margin-top: 24px;
+    margin-bottom: 10px;
+}
+
+
+/* DETALLE: AJUSTE DEL ENCABEZADO */
+
+.papeleria-page-header {
+    gap: 20px;
+}
+
+.papeleria-page-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+/* CELULAR SOLO PARA ESTA PÁGINA */
+
+@media (max-width: 767px) {
+
+    .papeleria-card-body {
+        padding: 18px;
+    }
+
+    .papeleria-card-header {
+        padding: 17px 18px;
+    }
+
+    .papeleria-status-box {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .papeleria-page-actions {
+        width: 100%;
+    }
+
+    .papeleria-page-actions .papeleria-btn {
+        flex: 1;
+    }
+
+    .papeleria-photo {
+        min-height: 240px;
+    }
+
+    .papeleria-table {
+        min-width: 620px;
+    }
+
+    .papeleria-back .papeleria-btn {
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   FORMULARIO DE PRODUCTOS
+   ========================================================= */
+
+.papeleria-form-container {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 8px 28px rgba(92, 70, 80, 0.06);
+}
+
+
+/* SECCIONES */
+
+.papeleria-form-section {
+    margin-bottom: 22px;
+    overflow: hidden;
+    background: #fffafd;
+    border: 1px solid var(--borde);
+    border-radius: 20px;
+}
+
+.papeleria-form-section:last-of-type {
+    margin-bottom: 0;
+}
+
+.papeleria-form-section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 20px;
+    background: #fff7fb;
+    border-bottom: 1px solid var(--borde);
+}
+
+.papeleria-form-section-header h3 {
+    margin: 0;
+    color: var(--texto);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.papeleria-form-section-header p {
+    margin: 3px 0 0;
+    color: #987f8a;
+    font-size: 0.78rem;
+}
+
+.papeleria-form-section-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    font-size: 0.95rem;
+}
+
+.papeleria-form-section-icon.pink {
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+}
+
+.papeleria-form-section-icon.mint {
+    background: var(--menta);
+    color: #679f91;
+}
+
+.papeleria-form-section-icon.lavender {
+    background: var(--lavanda);
+    color: #8172aa;
+}
+
+.papeleria-form-section-icon.peach {
+    background: var(--durazno);
+    color: #b67861;
+}
+
+.papeleria-form-section-body {
+    padding: 24px;
+}
+
+
+/* ETIQUETAS */
+
+.papeleria-form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--texto);
+    font-size: 0.82rem;
+    font-weight: 700;
+}
+
+.papeleria-form-label .required {
+    color: #d98291;
+    margin-left: 2px;
+}
+
+
+/* CAMPOS DEL FORMULARIO */
+
+.papeleria-form-section-body .form-control,
+.papeleria-form-section-body .form-select,
+.papeleria-form-section-body input[type="text"],
+.papeleria-form-section-body input[type="number"],
+.papeleria-form-section-body input[type="date"],
+.papeleria-form-section-body input[type="email"],
+.papeleria-form-section-body input[type="file"],
+.papeleria-form-section-body select,
+.papeleria-form-section-body textarea {
+    width: 100%;
+    border: 1px solid #ead8e0;
+    border-radius: 12px;
+    background: #ffffff;
+    color: var(--texto);
+    padding: 10px 13px;
+    font-size: 0.88rem;
+    box-shadow: none;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+}
+
+.papeleria-form-section-body textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.papeleria-form-section-body input[type="file"] {
+    padding: 8px 10px;
+}
+
+.papeleria-form-section-body .form-control:focus,
+.papeleria-form-section-body .form-select:focus,
+.papeleria-form-section-body input:focus,
+.papeleria-form-section-body select:focus,
+.papeleria-form-section-body textarea:focus {
+    border-color: var(--rosa-principal);
+    background: #fffafd;
+    box-shadow: 0 0 0 3px rgba(233, 168, 192, 0.16);
+    outline: none;
+}
+
+.papeleria-form-section-body input::placeholder,
+.papeleria-form-section-body textarea::placeholder {
+    color: #b39da6;
+}
+
+
+/* AYUDA */
+
+.papeleria-help-text {
+    display: block;
+    margin-top: 6px;
+    color: #9b858e;
+    font-size: 0.74rem;
+    line-height: 1.5;
+}
+
+
+/* ERRORES */
+
+.papeleria-field-error {
+    margin-top: 6px;
+    color: #c96f7b;
+    font-size: 0.76rem;
+    line-height: 1.5;
+}
+
+.papeleria-field-error ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.papeleria-form-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 22px;
+    padding: 15px 17px;
+    border: 1px solid #f0ccd2;
+    border-radius: 15px;
+    background: #fff3f4;
+    color: #9f5f68;
+}
+
+.papeleria-alert-icon {
+    flex-shrink: 0;
+    font-size: 1.1rem;
+    color: #c87880;
+}
+
+.papeleria-form-alert strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #9f5f68;
+}
+
+
+/* FOTOGRAFÍA */
+
+.papeleria-file-input {
+    padding: 14px;
+    border: 1px dashed #e5cbd5;
+    border-radius: 15px;
+    background: #fffafd;
+}
+
+.papeleria-current-photo {
+    width: fit-content;
+    max-width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    background: white;
+}
+
+.papeleria-current-photo-title {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 10px;
+    color: var(--texto);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.papeleria-current-photo-title i {
+    color: var(--rosa-oscuro);
+}
+
+.papeleria-current-photo img {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    max-height: 250px;
+    object-fit: contain;
+    border-radius: 11px;
+}
+
+
+/* ESTADO ACTIVO */
+
+.papeleria-switch-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 15px 17px;
+    border: 1px solid var(--borde);
+    border-radius: 15px;
+    background: #fffafd;
+    cursor: pointer;
+}
+
+.papeleria-switch-row input {
+    flex-shrink: 0;
+    width: 19px;
+    height: 19px;
+    accent-color: var(--rosa-principal);
+}
+
+.papeleria-switch-row strong {
+    display: block;
+    color: var(--texto);
+    font-size: 0.88rem;
+}
+
+.papeleria-switch-row small {
+    display: block;
+    margin-top: 3px;
+    color: #9b858e;
+    font-size: 0.75rem;
+}
+
+
+/* BOTONES FINALES */
+
+.papeleria-form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid var(--borde);
+}
+
+.papeleria-form-actions .papeleria-btn {
+    min-width: 150px;
+}
+
+
+/* CELULAR - SOLO ESTE FORMULARIO */
+
+@media (max-width: 767px) {
+
+    .papeleria-form-container {
+        padding: 14px;
+        border-radius: 18px;
+    }
+
+    .papeleria-form-section {
+        border-radius: 16px;
+    }
+
+    .papeleria-form-section-header {
+        padding: 15px;
+    }
+
+    .papeleria-form-section-body {
+        padding: 18px 15px;
+    }
+
+    .papeleria-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .papeleria-form-actions .papeleria-btn {
+        width: 100%;
+    }
+
+    .papeleria-current-photo {
+        width: 100%;
+    }
+
+    .papeleria-current-photo img {
+        max-width: 100%;
+    }
+}
+
+
+/* =========================================================
+   CATEGORÍAS, UBICACIONES, AUDITORÍA, PERFIL Y AUTENTICACIÓN
+   MI PAPELERÍA
+   ========================================================= */
+
+
+/* =========================================================
+   CATEGORÍAS Y UBICACIONES
+   ========================================================= */
+
+.papeleria-category-card {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(92, 70, 80, 0.06);
+    overflow: hidden;
+}
+
+.papeleria-category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px 22px;
+    border-bottom: 1px solid var(--borde);
+    background: #fffafd;
+}
+
+.section-icon-lavender {
+    background: var(--lavanda);
+    color: #8172aa;
+}
+
+.section-icon-mint {
+    background: var(--menta);
+    color: #679f91;
+}
+
+.category-code {
+    display: inline-flex;
+    padding: 6px 10px;
+    border-radius: 9px;
+    background: #fff2f7;
+    color: var(--rosa-oscuro);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.category-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+}
+
+.category-name-cell strong {
+    color: var(--texto);
+    font-size: 0.9rem;
+}
+
+.category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: var(--lavanda);
+    color: #8172aa;
+    flex-shrink: 0;
+}
+
+.category-icon-mint {
+    background: var(--menta);
+    color: #679f91;
+}
+
+.category-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #f2edf9;
+    color: #8172aa;
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.category-count i {
+    font-size: 0.7rem;
+}
+
+.category-count-mint {
+    background: #edf8f4;
+    color: #679f91;
+}
+
+.category-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.papeleria-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 35px;
+    padding: 7px 11px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.76rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.papeleria-action-edit {
+    background: #f2edf9;
+    border: 1px solid #dfd5ef;
+    color: #8172aa;
+}
+
+.papeleria-action-edit:hover {
+    background: #e8def3;
+    color: #6f6097;
+}
+
+.papeleria-action-delete {
+    background: #fff0f1;
+    border: 1px solid #f1d1d4;
+    color: #c87880;
+}
+
+.papeleria-action-delete:hover {
+    background: #f9dfe2;
+    color: #ad626b;
+}
+
+.location-type-badge {
+    display: inline-flex;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #edf8f4;
+    color: #679f91;
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.category-empty-icon {
+    background: var(--lavanda);
+    color: #8172aa;
+}
+
+.location-empty-icon {
+    background: var(--menta);
+    color: #679f91;
+}
+
+
+/* =========================================================
+   FORMULARIO DE CATEGORÍA
+   ========================================================= */
+
+.papeleria-category-form {
+    padding: 0;
+    overflow: hidden;
+}
+
+.papeleria-category-form .papeleria-form-section {
+    margin-bottom: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.papeleria-category-form .papeleria-form-section-header {
+    border-radius: 0;
+}
+
+
+/* =========================================================
+   ELIMINAR PRODUCTO
+   ========================================================= */
+
+.papeleria-delete-page {
+    display: flex;
+    justify-content: center;
+    padding: 25px 0 35px;
+}
+
+.papeleria-delete-card {
+    width: 100%;
+    max-width: 720px;
+    padding: 34px;
+    background: var(--blanco);
+    border: 1px solid #f0dce5;
+    border-radius: 26px;
+    box-shadow: 0 12px 35px rgba(92, 70, 80, 0.08);
+    text-align: center;
+}
+
+.papeleria-delete-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 18px;
+    border-radius: 22px;
+    background: #fff0f1;
+    color: #c87880;
+    font-size: 1.7rem;
+}
+
+.papeleria-delete-kicker {
+    color: #c87880;
+}
+
+.papeleria-delete-title {
+    margin: 3px 0 8px;
+    color: var(--texto);
+    font-size: 1.65rem;
+    font-weight: 800;
+}
+
+.papeleria-delete-subtitle {
+    margin: 0 auto 24px;
+    color: #987f8a;
+    font-size: 0.9rem;
+}
+
+.papeleria-delete-warning {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #fff7f5;
+    border: 1px solid #f3ddd5;
+    border-radius: 15px;
+    text-align: left;
+}
+
+.papeleria-warning-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: var(--durazno);
+    color: #b67861;
+    flex-shrink: 0;
+}
+
+.papeleria-delete-warning strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #8f6658;
+    font-size: 0.85rem;
+}
+
+.papeleria-delete-warning p {
+    margin: 0;
+    color: #a47e70;
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+.papeleria-delete-product {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    margin-bottom: 16px;
+    background: #fffafd;
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    text-align: left;
+}
+
+.papeleria-delete-product-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+    flex-shrink: 0;
+}
+
+.papeleria-delete-product-info span {
+    display: block;
+    margin-bottom: 2px;
+    color: #a28c95;
+    font-size: 0.72rem;
+}
+
+.papeleria-delete-product-info strong {
+    display: block;
+    color: var(--texto);
+    font-size: 0.95rem;
+}
+
+.papeleria-delete-product-info small {
+    color: var(--rosa-oscuro);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.papeleria-delete-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+.papeleria-delete-details > div {
+    padding: 13px 14px;
+    background: #fffafd;
+    border: 1px solid var(--borde);
+    border-radius: 13px;
+}
+
+.papeleria-delete-details span {
+    display: block;
+    margin-bottom: 4px;
+    color: #a28c95;
+    font-size: 0.72rem;
+}
+
+.papeleria-delete-details strong {
+    color: var(--texto);
+    font-size: 0.82rem;
+}
+
+.papeleria-delete-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+
+/* =========================================================
+   AUDITORÍA
+   ========================================================= */
+
+.papeleria-audit-table {
+    min-width: 900px;
+}
+
+.papeleria-date-input {
+    min-height: 43px;
+    border: 1px solid #ecdce4;
+    border-radius: 12px;
+    color: var(--texto);
+}
+
+.papeleria-date-input:focus {
+    border-color: var(--rosa-principal);
+    box-shadow: 0 0 0 3px rgba(233, 168, 192, 0.14);
+}
+
+.audit-date {
+    color: #806b75;
+    font-size: 0.78rem;
+    white-space: nowrap;
+}
+
+.audit-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.audit-user-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+    font-size: 0.7rem;
+}
+
+.audit-user strong {
+    color: var(--texto);
+    font-size: 0.8rem;
+}
+
+.audit-action-badge {
+    display: inline-flex;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: #f1edf8;
+    color: #8172aa;
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.audit-model {
+    display: inline-flex;
+    padding: 5px 8px;
+    border-radius: 8px;
+    background: #edf8f4;
+    color: #679f91;
+    font-size: 0.72rem;
+    font-weight: 700;
+}
+
+.audit-description {
+    color: #77636c;
+    font-size: 0.8rem;
+}
+
+.papeleria-view-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 34px;
+    padding: 7px 11px;
+    border: 1px solid #ecd6e1;
+    border-radius: 10px;
+    background: #fff7fa;
+    color: var(--rosa-oscuro);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+
+.papeleria-view-btn:hover {
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+}
+
+.papeleria-audit-data {
+    margin-top: 24px;
+    padding-top: 22px;
+    border-top: 1px solid var(--borde);
+}
+
+.papeleria-audit-data-header {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 12px;
+}
+
+.audit-data-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+}
+
+.audit-data-icon.peach {
+    background: var(--durazno);
+    color: #b67861;
+}
+
+.audit-data-icon.mint {
+    background: var(--menta);
+    color: #679f91;
+}
+
+.papeleria-audit-data-header strong {
+    display: block;
+    color: var(--texto);
+    font-size: 0.9rem;
+}
+
+.papeleria-audit-data-header span {
+    display: block;
+    margin-top: 2px;
+    color: #9b858e;
+    font-size: 0.75rem;
+}
+
+.papeleria-audit-data pre {
+    margin: 0;
+    padding: 17px;
+    overflow-x: auto;
+    background: #fffafd;
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    color: #715d66;
+    font-family: Consolas, Monaco, monospace;
+    font-size: 0.78rem;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   PERFIL
+   ========================================================= */
+
+.papeleria-profile-card {
+    overflow: hidden;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 22px;
+    box-shadow: 0 8px 24px rgba(92, 70, 80, 0.06);
+}
+
+.papeleria-profile-top {
+    padding: 28px 20px 22px;
+    text-align: center;
+    background:
+        radial-gradient(circle at top left, #fff0f6 0%, transparent 55%),
+        #fffafd;
+    border-bottom: 1px solid var(--borde);
+}
+
+.papeleria-profile-photo,
+.papeleria-profile-placeholder {
+    width: 128px;
+    height: 128px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+}
+
+.papeleria-profile-photo {
+    display: block;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 7px 20px rgba(92, 70, 80, 0.1);
+}
+
+.papeleria-profile-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+    font-size: 3rem;
+}
+
+.papeleria-profile-top h3 {
+    margin: 0;
+    color: var(--texto);
+    font-size: 1.1rem;
+}
+
+.papeleria-profile-top p {
+    margin: 4px 0 0;
+    color: #9b858e;
+    font-size: 0.8rem;
+}
+
+.papeleria-profile-info {
+    padding: 8px 20px;
+}
+
+.papeleria-profile-info > div {
+    padding: 14px 0;
+    border-bottom: 1px dashed #f0e1e7;
+}
+
+.papeleria-profile-info > div:last-child {
+    border-bottom: none;
+}
+
+.papeleria-profile-info span {
+    display: block;
+    margin-bottom: 4px;
+    color: #9b858e;
+    font-size: 0.74rem;
+}
+
+.papeleria-profile-info span i {
+    width: 17px;
+    color: var(--rosa-oscuro);
+}
+
+.papeleria-profile-info strong {
+    display: block;
+    color: var(--texto);
+    font-size: 0.84rem;
+    overflow-wrap: anywhere;
+}
+
+.papeleria-profile-footer {
+    padding: 18px 20px 20px;
+    border-top: 1px solid var(--borde);
+}
+
+.papeleria-profile-form-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 17px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--borde);
+    color: var(--texto);
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.papeleria-profile-form-title i {
+    color: var(--rosa-oscuro);
+}
+
+
+/* =========================================================
+   LOGIN Y REGISTRO
+   ========================================================= */
+
+.papeleria-auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 68vh;
+    padding: 35px 15px 50px;
+}
+
+.papeleria-auth-card,
+.papeleria-register-card {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    padding: 35px;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 26px;
+    box-shadow: 0 12px 35px rgba(92, 70, 80, 0.08);
+    text-align: center;
+}
+
+.papeleria-register-card {
+    max-width: 620px;
+}
+
+.papeleria-auth-decoration {
+    position: absolute;
+    top: 17px;
+    right: 22px;
+    display: flex;
+    gap: 7px;
+    color: #dfb4c5;
+    font-size: 0.8rem;
+}
+
+.papeleria-auth-decoration span:nth-child(2) {
+    color: #b8acd6;
+}
+
+.papeleria-auth-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 66px;
+    height: 66px;
+    margin: 0 auto 16px;
+    border-radius: 20px;
+    background: var(--rosa-suave);
+    color: var(--rosa-oscuro);
+    font-size: 1.5rem;
+}
+
+.papeleria-auth-icon-lavender {
+    background: var(--lavanda);
+    color: #8172aa;
+}
+
+.papeleria-auth-title {
+    margin: 2px 0 7px;
+    color: var(--texto);
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.papeleria-auth-subtitle {
+    max-width: 370px;
+    margin: 0 auto 28px;
+    color: #987f8a;
+    font-size: 0.83rem;
+    line-height: 1.6;
+}
+
+.papeleria-auth-card .papeleria-form-label,
+.papeleria-register-card .papeleria-form-label {
+    text-align: left;
+}
+
+.papeleria-auth-card .papeleria-form-label i {
+    margin-right: 5px;
+    color: var(--rosa-oscuro);
+}
+
+.papeleria-auth-submit {
+    width: 100%;
+    min-height: 46px;
+    margin-top: 7px;
+    border: none;
+}
+
+.papeleria-auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0 18px;
+}
+
+.papeleria-auth-divider span {
+    flex: 1;
+    height: 1px;
+    background: var(--borde);
+}
+
+.papeleria-auth-divider small {
+    color: #b09ca5;
+    font-size: 0.72rem;
+}
+
+.papeleria-auth-register {
+    margin: 0;
+    color: #8e7982;
+    font-size: 0.8rem;
+}
+
+.papeleria-auth-register a {
+    color: var(--rosa-oscuro);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.papeleria-auth-register a:hover {
+    color: #b66686;
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   AJUSTES GENERALES PARA ESTAS PÁGINAS
+   ========================================================= */
+
+.papeleria-page-header {
+    margin-bottom: 25px;
+}
+
+.papeleria-page-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   RESPONSIVE ESPECÍFICO DE ESTAS PÁGINAS
+   NO MODIFICA EL RESPONSIVE GLOBAL
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+    .papeleria-category-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .category-actions {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .papeleria-action-btn {
+        width: 100%;
+    }
+
+    .papeleria-delete-card {
+        padding: 25px 18px;
+    }
+
+    .papeleria-delete-details {
+        grid-template-columns: 1fr;
+    }
+
+    .papeleria-delete-actions {
+        flex-direction: column;
+    }
+
+    .papeleria-delete-actions .papeleria-btn {
+        width: 100%;
+    }
+
+    .papeleria-profile-card {
+        margin-bottom: 5px;
+    }
+
+    .papeleria-auth-card,
+    .papeleria-register-card {
+        padding: 27px 20px;
+    }
+
+    .papeleria-auth-page {
+        padding-top: 20px;
+    }
+
+    .papeleria-page-actions {
+        width: 100%;
+    }
+
+    .papeleria-page-actions .papeleria-btn {
+        flex: 1;
+    }
+
+}
+
+
+/* =========================================================
+   SIDEBAR - MI PAPELERÍA
+   ========================================================= */
+
+.sidebar {
+    background: #fffafd !important;
+    border-right: 1px solid var(--borde) !important;
+    box-shadow: 4px 0 18px rgba(92, 70, 80, 0.04);
+    padding: 20px 14px !important;
+}
+
+/* Contenedor de los enlaces */
+.sidebar .nav {
+    gap: 7px;
+}
+
+/* Enlaces del menú */
+.sidebar .nav-link {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    min-height: 46px;
+    padding: 11px 14px !important;
+
+    border-radius: 13px !important;
+    border-left: 0 !important;
+
+    color: #6f5b64 !important;
+    background: transparent !important;
+
+    font-size: 0.88rem;
+    font-weight: 600;
+
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* Iconos del menú */
+.sidebar .nav-link i {
+    width: 22px;
+    margin-right: 0 !important;
+
+    color: #c989a5 !important;
+
+    font-size: 0.95rem;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+/* Hover */
+.sidebar .nav-link:hover {
+    background: #fff0f6 !important;
+    color: var(--rosa-oscuro) !important;
+    transform: translateX(2px);
+}
+
+.sidebar .nav-link:hover i {
+    color: var(--rosa-oscuro) !important;
+}
+
+/* Elemento activo */
+.sidebar .nav-link.active {
+    background: linear-gradient(
+        135deg,
+        #f8dce7 0%,
+        #fceaf1 100%
+    ) !important;
+
+    color: var(--rosa-oscuro) !important;
+
+    font-weight: 700;
+
+    box-shadow: 0 4px 12px rgba(201, 125, 155, 0.10);
+}
+
+/* Icono del elemento activo */
+.sidebar .nav-link.active i {
+    color: var(--rosa-oscuro) !important;
+}
+
+/* Pequeño detalle visual para el activo */
+.sidebar .nav-link.active::before {
+    content: "";
+    width: 4px;
+    height: 24px;
+
+    margin-left: -10px;
+
+    border-radius: 999px;
+    background: var(--rosa-principal);
+}
+
+/* Separación visual entre grupos si existen */
+.sidebar .nav-item {
+    margin-bottom: 1px;
+}
+
+/* =========================================================
+   SIDEBAR - ICONOS CON TOQUE PASTEL
+   ========================================================= */
+
+.sidebar .nav-link:nth-child(1) i {
+    color: #e08bad !important;
+}
+
+.sidebar .nav-link:nth-child(2) i {
+    color: #9a8bc5 !important;
+}
+
+.sidebar .nav-link:nth-child(3) i {
+    color: #d99b78 !important;
+}
+
+.sidebar .nav-link:nth-child(4) i {
+    color: #9a8bc5 !important;
+}
+
+.sidebar .nav-link:nth-child(5) i {
+    color: #d99b78 !important;
+}
+
+.sidebar .nav-link:nth-child(6) i {
+    color: #78ad9e !important;
+}
+
+.sidebar .nav-link:nth-child(7) i {
+    color: #d98ca9 !important;
+}
+
+/* Cuando está activo, todos usan el rosa de la interfaz */
+.sidebar .nav-link.active i {
+    color: var(--rosa-oscuro) !important;
+}
+
+/* =========================================================
+   SIDEBAR - TEXTO
+   ========================================================= */
+
+.sidebar .nav-link span {
+    color: inherit;
+}
+
+/* =========================================================
+   SIDEBAR - PARTE SUPERIOR SI EXISTE UN TÍTULO
+   ========================================================= */
+
+.sidebar .sidebar-heading {
+    color: #a0838e !important;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+
+/* =========================================================
+   SIDEBAR - ESTADO HOVER SIN MOVER EL CONTENIDO
+   ========================================================= */
+
+.sidebar .nav-link:focus {
+    color: var(--rosa-oscuro) !important;
+    background: #fff0f6 !important;
+    box-shadow: none !important;
+}
+
+.sidebar .nav-link:focus-visible {
+    outline: 2px solid #efc2d3;
+    outline-offset: 2px;
+}

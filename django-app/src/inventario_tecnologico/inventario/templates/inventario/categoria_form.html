@@ -1,0 +1,38 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Nueva Categoría{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-tags"></i> Nueva Categoría</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">{{ form.nombre.label }}</label>
+                {{ form.nombre }}
+                {{ form.nombre.errors }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">{{ form.codigo.label }}</label>
+                {{ form.codigo }}
+                {{ form.codigo.errors }}
+            </div>
+            <div class="mb-3">
+                <label class="form-label">{{ form.descripcion.label }}</label>
+                {{ form.descripcion }}
+                {{ form.descripcion.errors }}
+            </div>
+            <div class="mb-3 form-check">
+                {{ form.activa }}
+                <label class="form-check-label">{{ form.activa.label }}</label>
+            </div>
+            <button type="submit" class="btn btn-sena-naranja">Guardar</button>
+            <a href="{% url 'inventario:categoria_list' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

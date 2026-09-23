@@ -1,0 +1,1396 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Mi Papelería - Dashboard{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================
+     ENCABEZADO
+     ========================================================= -->
+
+<div class="papeleria-welcome">
+
+    <div class="welcome-text">
+        <span class="welcome-badge">
+            <i class="fas fa-sparkles"></i>
+            Panel de gestión
+        </span>
+
+        <h1>
+            ¡Hola, {{ user.username }}! 💗
+        </h1>
+
+        <p>
+            Todo lo que necesitas para mantener tu papelería
+            organizada y bajo control.
+        </p>
+    </div>
+
+    <div class="welcome-decoration">
+        <div class="decoration-circle circle-one"></div>
+        <div class="decoration-circle circle-two"></div>
+        <i class="fas fa-heart"></i>
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ESTADÍSTICAS PRINCIPALES
+     ========================================================= -->
+
+<div class="row g-4 dashboard-stats">
+
+    <!-- Activos -->
+    <div class="col-xl-3 col-md-6">
+
+        <div class="dashboard-stat-card stat-pink">
+
+            <div class="stat-card-top">
+                <div class="stat-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+
+                <span class="stat-decoration">
+                    <i class="fas fa-heart"></i>
+                </span>
+            </div>
+
+            <div class="stat-number">
+                {{ total_activos }}
+            </div>
+
+            <div class="stat-label">
+                Productos registrados
+            </div>
+
+            <a href="{% url 'inventario:activo_list' %}"
+               class="stat-link">
+                Ver inventario
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Categorías -->
+    <div class="col-xl-3 col-md-6">
+
+        <div class="dashboard-stat-card stat-lavender">
+
+            <div class="stat-card-top">
+                <div class="stat-icon">
+                    <i class="fas fa-tags"></i>
+                </div>
+
+                <span class="stat-decoration">
+                    <i class="fas fa-star"></i>
+                </span>
+            </div>
+
+            <div class="stat-number">
+                {{ total_categorias }}
+            </div>
+
+            <div class="stat-label">
+                Categorías
+            </div>
+
+            <a href="{% url 'inventario:categoria_list' %}"
+               class="stat-link">
+                Ver categorías
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Ubicaciones -->
+    <div class="col-xl-3 col-md-6">
+
+        <div class="dashboard-stat-card stat-peach">
+
+            <div class="stat-card-top">
+                <div class="stat-icon">
+                    <i class="fas fa-store"></i>
+                </div>
+
+                <span class="stat-decoration">
+                    <i class="fas fa-map-marker-alt"></i>
+                </span>
+            </div>
+
+            <div class="stat-number">
+                {{ total_ubicaciones }}
+            </div>
+
+            <div class="stat-label">
+                Ubicaciones
+            </div>
+
+            <a href="{% url 'inventario:ubicacion_list' %}"
+               class="stat-link">
+                Ver ubicaciones
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Valor -->
+    <div class="col-xl-3 col-md-6">
+
+        <div class="dashboard-stat-card stat-green">
+
+            <div class="stat-card-top">
+                <div class="stat-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+
+                <span class="stat-decoration">
+                    <i class="fas fa-sparkles"></i>
+                </span>
+            </div>
+
+            <div class="stat-number stat-money">
+                ${{ valor_total|floatformat:0 }}
+            </div>
+
+            <div class="stat-label">
+                Valor total del inventario
+            </div>
+
+            <span class="stat-link stat-link-disabled">
+                Inventario actual
+                <i class="fas fa-chart-line"></i>
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     INFORMACIÓN DEL INVENTARIO
+     ========================================================= -->
+
+<div class="row g-4 dashboard-section">
+
+
+    <!-- Activos por estado -->
+
+    <div class="col-xl-6">
+
+        <div class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <div class="panel-icon pink-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+
+                    <div>
+                        <h3>Activos por estado</h3>
+                        <p>Estado actual de tus productos</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="table-responsive">
+
+                    <table class="table papeleria-table">
+
+                        <thead>
+                            <tr>
+                                <th>Estado</th>
+                                <th class="text-end">Cantidad</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for est in activos_por_estado %}
+
+                            <tr>
+
+                                <td>
+                                    <div class="table-name">
+
+                                        <span class="table-dot"
+                                              style="background-color: {{ est.color }};">
+                                        </span>
+
+                                        {{ est.nombre }}
+
+                                    </div>
+                                </td>
+
+                                <td class="text-end">
+
+                                    <span class="soft-badge">
+                                        {{ est.cantidad }}
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+                                <td colspan="2"
+                                    class="empty-message">
+                                    No hay estados registrados.
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Top categorías -->
+
+    <div class="col-xl-6">
+
+        <div class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <div class="panel-icon lavender-icon">
+                        <i class="fas fa-ranking-star"></i>
+                    </div>
+
+                    <div>
+                        <h3>Top 5 categorías</h3>
+                        <p>Categorías con más productos</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="table-responsive">
+
+                    <table class="table papeleria-table">
+
+                        <thead>
+                            <tr>
+                                <th>Categoría</th>
+                                <th class="text-end">Cantidad</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for cat in top_categorias %}
+
+                            <tr>
+
+                                <td>
+                                    <div class="table-name">
+                                        <span class="category-mini-icon">
+                                            <i class="fas fa-tag"></i>
+                                        </span>
+
+                                        {{ cat.nombre }}
+                                    </div>
+                                </td>
+
+                                <td class="text-end">
+
+                                    <span class="soft-badge lavender-badge">
+                                        {{ cat.cantidad_activos }}
+                                    </span>
+
+                                </td>
+
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+                                <td colspan="2"
+                                    class="empty-message">
+                                    No hay categorías registradas.
+                                </td>
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MOVIMIENTOS Y MANTENIMIENTOS
+     ========================================================= -->
+
+<div class="row g-4 dashboard-section">
+
+
+    <!-- Últimos movimientos -->
+
+    <div class="col-xl-6">
+
+        <div class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <div class="panel-icon peach-icon">
+                        <i class="fas fa-arrow-right-arrow-left"></i>
+                    </div>
+
+                    <div>
+                        <h3>Últimos movimientos</h3>
+                        <p>Movimientos recientes del inventario</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="activity-list">
+
+                    {% for mov in ultimos_movimientos %}
+
+                    <div class="activity-item">
+
+                        <div class="activity-icon">
+                            <i class="fas fa-box"></i>
+                        </div>
+
+                        <div class="activity-content">
+
+                            <strong>
+                                {{ mov.activo.codigo_inventario }}
+                            </strong>
+
+                            <span>
+                                {{ mov.ubicacion_origen.nombre|default:"N/A" }}
+                                <i class="fas fa-arrow-right"></i>
+                                {{ mov.ubicacion_destino.nombre }}
+                            </span>
+
+                            <small>
+                                {{ mov.fecha_movimiento|date:"d/m/Y H:i" }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    {% empty %}
+
+                    <div class="empty-state">
+
+                        <div class="empty-state-icon">
+                            <i class="fas fa-box-open"></i>
+                        </div>
+
+                        <p>
+                            Sin movimientos registrados
+                        </p>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Mantenimientos -->
+
+    <div class="col-xl-6">
+
+        <div class="dashboard-panel">
+
+            <div class="panel-header">
+
+                <div class="panel-title">
+
+                    <div class="panel-icon yellow-icon">
+                        <i class="fas fa-screwdriver-wrench"></i>
+                    </div>
+
+                    <div>
+                        <h3>Mantenimientos pendientes</h3>
+                        <p>Productos que requieren atención</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="panel-body">
+
+                <div class="activity-list">
+
+                    {% for mant in mantenimientos_pendientes %}
+
+                    <div class="activity-item maintenance-item">
+
+                        <div class="activity-icon maintenance-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+
+                        <div class="activity-content">
+
+                            <strong>
+                                {{ mant.activo.codigo_inventario }}
+                            </strong>
+
+                            <span>
+                                {{ mant.get_tipo_display }}
+                                ·
+                                {{ mant.get_estado_mantenimiento_display }}
+                            </span>
+
+                            <small>
+                                {{ mant.fecha_inicio|date:"d/m/Y" }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                    {% empty %}
+
+                    <div class="empty-state">
+
+                        <div class="empty-state-icon success-empty">
+                            <i class="fas fa-check"></i>
+                        </div>
+
+                        <p>
+                            No hay mantenimientos pendientes ✨
+                        </p>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     ACTIVIDAD RECIENTE
+     ========================================================= -->
+
+<div class="dashboard-panel dashboard-section">
+
+    <div class="panel-header">
+
+        <div class="panel-title">
+
+            <div class="panel-icon pink-icon">
+                <i class="fas fa-clock-rotate-left"></i>
+            </div>
+
+            <div>
+                <h3>Actividad reciente</h3>
+                <p>Últimas acciones realizadas en el sistema</p>
+            </div>
+
+        </div>
+
+        <a href="{% url 'inventario:log_list' %}"
+           class="panel-action">
+            Ver todo
+            <i class="fas fa-arrow-right"></i>
+        </a>
+
+    </div>
+
+    <div class="panel-body activity-full">
+
+        {% for log in actividad_reciente %}
+
+        <div class="recent-log">
+
+            <div class="recent-log-icon">
+                <i class="fas fa-bolt"></i>
+            </div>
+
+            <div class="recent-log-content">
+
+                <div>
+                    <strong>{{ log.usuario_nombre }}</strong>
+
+                    <span>
+                        {{ log.descripcion|truncatewords:12 }}
+                    </span>
+                </div>
+
+                <small>
+                    {{ log.fecha_hora|date:"d/m/Y H:i" }}
+                </small>
+
+            </div>
+
+            <span class="action-badge">
+                {{ log.get_accion_display }}
+            </span>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="fas fa-history"></i>
+            </div>
+
+            <p>
+                Sin actividad registrada
+            </p>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     GRÁFICOS
+     ========================================================= -->
+
+<div class="dashboard-section">
+
+    <div class="section-heading">
+
+        <div>
+            <span class="section-kicker">
+                <i class="fas fa-sparkles"></i>
+                Estadísticas
+            </span>
+
+            <h2>
+                Visualiza tu inventario
+            </h2>
+
+            <p>
+                Consulta de forma visual cómo están distribuidos
+                tus productos.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- Fila 1 -->
+
+    <div class="row g-4">
+
+        <!-- Categorías -->
+
+        <div class="col-xl-6">
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div class="chart-title">
+
+                        <div class="chart-icon pink-chart-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+
+                        <div>
+                            <h3>Activos por categoría</h3>
+                            <span>Distribución de productos</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="categoriaChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Ubicaciones -->
+
+        <div class="col-xl-6">
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div class="chart-title">
+
+                        <div class="chart-icon lavender-chart-icon">
+                            <i class="fas fa-chart-doughnut"></i>
+                        </div>
+
+                        <div>
+                            <h3>Activos por ubicación</h3>
+                            <span>Dónde están tus productos</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="ubicacionChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Estados -->
+
+        <div class="col-xl-6">
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div class="chart-title">
+
+                        <div class="chart-icon peach-chart-icon">
+                            <i class="fas fa-chart-column"></i>
+                        </div>
+
+                        <div>
+                            <h3>Activos por estado</h3>
+                            <span>Condición de los productos</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="estadoChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Valor -->
+
+        <div class="col-xl-6">
+
+            <div class="chart-card">
+
+                <div class="chart-header">
+
+                    <div class="chart-title">
+
+                        <div class="chart-icon green-chart-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+
+                        <div>
+                            <h3>Valor por categoría</h3>
+                            <span>Valor económico del inventario</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="valorChart"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     REPORTES
+     ========================================================= -->
+
+<div class="reports-section dashboard-section">
+
+    <div class="reports-header">
+
+        <div>
+
+            <span class="section-kicker">
+                <i class="fas fa-file-lines"></i>
+                Documentos
+            </span>
+
+            <h2>
+                Reportes y exportaciones
+            </h2>
+
+            <p>
+                Descarga la información de tu inventario
+                cuando la necesites.
+            </p>
+
+        </div>
+
+        <div class="reports-decoration">
+            <i class="fas fa-folder-open"></i>
+        </div>
+
+    </div>
+
+
+    <div class="row g-3">
+
+        <!-- PDF general -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <a href="{% url 'inventario:reporte_inventario_pdf' %}"
+               class="report-card">
+
+                <div class="report-icon pdf-icon">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+
+                <div>
+                    <strong>Reporte general</strong>
+                    <span>Descargar PDF</span>
+                </div>
+
+                <i class="fas fa-arrow-right report-arrow"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- PDF ubicaciones -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <a href="{% url 'inventario:reporte_ubicaciones_pdf' %}"
+               class="report-card">
+
+                <div class="report-icon pdf-icon">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+
+                <div>
+                    <strong>Por ubicación</strong>
+                    <span>Descargar PDF</span>
+                </div>
+
+                <i class="fas fa-arrow-right report-arrow"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- Excel activos -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <a href="{% url 'inventario:exportar_activos_excel' %}"
+               class="report-card">
+
+                <div class="report-icon excel-icon">
+                    <i class="fas fa-file-excel"></i>
+                </div>
+
+                <div>
+                    <strong>Inventario</strong>
+                    <span>Descargar Excel</span>
+                </div>
+
+                <i class="fas fa-arrow-right report-arrow"></i>
+
+            </a>
+
+        </div>
+
+
+        <!-- Excel logs -->
+
+        <div class="col-xl-3 col-md-6">
+
+            <a href="{% url 'inventario:exportar_logs_excel' %}"
+               class="report-card">
+
+                <div class="report-icon excel-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+
+                <div>
+                    <strong>Auditoría</strong>
+                    <span>Descargar Excel</span>
+                </div>
+
+                <i class="fas fa-arrow-right report-arrow"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+
+/* =========================================================
+   CONFIGURACIÓN DE CHART.JS
+   ========================================================= */
+
+Chart.defaults.font.family =
+    "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+
+Chart.defaults.font.size = 12;
+
+Chart.defaults.color = '#806d77';
+
+
+/* =========================================================
+   PALETA DE COLORES DE LA PAPELERÍA
+   ========================================================= */
+
+const coloresPapeleria = [
+    '#E8A0BF',
+    '#CDB7E9',
+    '#F4C7AB',
+    '#A8C9A1',
+    '#F2D28B',
+    '#B9C7E8',
+    '#E7B7C8',
+    '#C6B4A5'
+];
+
+
+/* =========================================================
+   OBTENER DATOS DE LA API
+   ========================================================= */
+
+fetch('/api/activos/estadisticas/')
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error('Error al obtener estadísticas');
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        console.log('Estadísticas cargadas:', data);
+
+
+        /* =====================================================
+           GRÁFICO 1 - CATEGORÍAS
+           ===================================================== */
+
+        const categoriaCanvas =
+            document.getElementById('categoriaChart');
+
+        if (categoriaCanvas) {
+
+            const ctx1 =
+                categoriaCanvas.getContext('2d');
+
+            new Chart(ctx1, {
+
+                type: 'pie',
+
+                data: {
+
+                    labels:
+                        data.activos_por_categoria.map(
+                            item => item.categoria__nombre
+                        ),
+
+                    datasets: [{
+
+                        label: 'Cantidad de productos',
+
+                        data:
+                            data.activos_por_categoria.map(
+                                item => item.cantidad
+                            ),
+
+                        backgroundColor:
+                            coloresPapeleria,
+
+                        borderColor: '#ffffff',
+
+                        borderWidth: 3,
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    plugins: {
+
+                        legend: {
+
+                            position: 'bottom',
+
+                            labels: {
+
+                                padding: 16,
+
+                                usePointStyle: true,
+
+                                pointStyle: 'circle',
+
+                            }
+
+                        },
+
+                        tooltip: {
+
+                            backgroundColor: '#4a3b43',
+
+                            padding: 12,
+
+                            cornerRadius: 10,
+
+                            callbacks: {
+
+                                label: function(context) {
+
+                                    let label =
+                                        context.label || '';
+
+                                    if (label) {
+                                        label += ': ';
+                                    }
+
+                                    label += context.parsed;
+                                    label += ' productos';
+
+                                    return label;
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+
+        /* =====================================================
+           GRÁFICO 2 - UBICACIONES
+           ===================================================== */
+
+        const ubicacionCanvas =
+            document.getElementById('ubicacionChart');
+
+        if (ubicacionCanvas) {
+
+            const ctx2 =
+                ubicacionCanvas.getContext('2d');
+
+            new Chart(ctx2, {
+
+                type: 'doughnut',
+
+                data: {
+
+                    labels:
+                        data.activos_por_ubicacion.map(
+                            item => item.ubicacion__nombre
+                        ),
+
+                    datasets: [{
+
+                        label: 'Cantidad de productos',
+
+                        data:
+                            data.activos_por_ubicacion.map(
+                                item => item.cantidad
+                            ),
+
+                        backgroundColor:
+                            coloresPapeleria,
+
+                        borderColor: '#ffffff',
+
+                        borderWidth: 3,
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    cutout: '62%',
+
+                    plugins: {
+
+                        legend: {
+
+                            position: 'bottom',
+
+                            labels: {
+
+                                padding: 16,
+
+                                usePointStyle: true,
+
+                                pointStyle: 'circle',
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+
+        /* =====================================================
+           GRÁFICO 3 - ESTADOS
+           ===================================================== */
+
+        const estadoCanvas =
+            document.getElementById('estadoChart');
+
+        if (estadoCanvas) {
+
+            const ctx3 =
+                estadoCanvas.getContext('2d');
+
+            new Chart(ctx3, {
+
+                type: 'bar',
+
+                data: {
+
+                    labels:
+                        data.activos_por_estado.map(
+                            item => item.estado__nombre
+                        ),
+
+                    datasets: [{
+
+                        label: 'Cantidad de productos',
+
+                        data:
+                            data.activos_por_estado.map(
+                                item => item.cantidad
+                            ),
+
+                        backgroundColor:
+                            coloresPapeleria,
+
+                        borderColor:
+                            coloresPapeleria,
+
+                        borderWidth: 1,
+
+                        borderRadius: 8,
+
+                        borderSkipped: false,
+
+                    }]
+
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                    scales: {
+
+                        y: {
+
+                            beginAtZero: true,
+
+                            ticks: {
+                                stepSize: 1
+                            },
+
+                            grid: {
+                                color: '#f3e3ea'
+                            }
+
+                        },
+
+                        x: {
+
+                            grid: {
+                                display: false
+                            }
+
+                        }
+
+                    },
+
+                    plugins: {
+
+                        legend: {
+                            display: false
+                        }
+
+                    }
+
+                }
+
+            });
+
+        }
+
+
+        /* =====================================================
+           GRÁFICO 4 - VALOR POR CATEGORÍA
+           ===================================================== */
+
+        fetch('/api/activos/por_categoria/')
+
+            .then(response => response.json())
+
+            .then(categorias => {
+
+                const valorCanvas =
+                    document.getElementById('valorChart');
+
+                if (!valorCanvas) {
+                    return;
+                }
+
+                const ctx4 =
+                    valorCanvas.getContext('2d');
+
+                new Chart(ctx4, {
+
+                    type: 'bar',
+
+                    data: {
+
+                        labels:
+                            categorias.map(
+                                item => item.nombre
+                            ),
+
+                        datasets: [{
+
+                            label: 'Valor total',
+
+                            data:
+                                categorias.map(
+                                    item => item.valor_total || 0
+                                ),
+
+                            backgroundColor: '#E8A0BF',
+
+                            borderColor: '#D86A9B',
+
+                            borderWidth: 1,
+
+                            borderRadius: 8,
+
+                            borderSkipped: false,
+
+                        }]
+
+                    },
+
+                    options: {
+
+                        indexAxis: 'y',
+
+                        responsive: true,
+
+                        maintainAspectRatio: false,
+
+                        scales: {
+
+                            x: {
+
+                                beginAtZero: true,
+
+                                grid: {
+                                    color: '#f3e3ea'
+                                },
+
+                                ticks: {
+
+                                    callback:
+                                        function(value) {
+
+                                            return '$' +
+                                                value.toLocaleString();
+
+                                        }
+
+                                }
+
+                            },
+
+                            y: {
+
+                                grid: {
+                                    display: false
+                                }
+
+                            }
+
+                        },
+
+                        plugins: {
+
+                            legend: {
+                                display: false
+                            },
+
+                            tooltip: {
+
+                                backgroundColor:
+                                    '#4a3b43',
+
+                                padding: 12,
+
+                                cornerRadius: 10,
+
+                                callbacks: {
+
+                                    label:
+                                        function(context) {
+
+                                            return 'Valor: $' +
+                                                context.parsed.x
+                                                    .toLocaleString();
+
+                                        }
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                });
+
+            });
+
+    })
+
+    .catch(error => {
+
+        console.error(
+            'Error al cargar estadísticas:',
+            error
+        );
+
+        alert(
+            'Error al cargar los gráficos. ' +
+            'Por favor recarga la página.'
+        );
+
+    });
+
+</script>
+
+{% endblock %}

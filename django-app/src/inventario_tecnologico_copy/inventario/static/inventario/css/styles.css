@@ -1,0 +1,92 @@
+:root {
+    --sena-naranja: #FF5722;
+    --sena-verde: #39A900;
+    --sena-azul: #00324D;
+}
+
+.page-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--sena-verde);
+}
+
+.page-header h1 {
+    color: var(--sena-azul);
+    font-weight: 600;
+}
+
+.stat-card {
+    padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-icon {
+    font-size: 2.2rem;
+    color: var(--sena-naranja);
+    margin-bottom: 0.75rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--sena-azul);
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    color: #6c757d;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    letter-spacing: 0.5px;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-header {
+    padding: 0.9rem 1.5rem;
+    font-weight: 600;
+}
+
+.bg-sena-azul {
+    background-color: var(--sena-azul) !important;
+}
+
+.bg-sena-verde {
+    background-color: var(--sena-verde) !important;
+}
+
+.btn-sena-primary {
+    background-color: var(--sena-azul);
+    border-color: var(--sena-azul);
+    color: white;
+}
+
+.btn-sena-primary:hover {
+    background-color: #001f30;
+    border-color: #001f30;
+    color: white;
+}
+
+.btn-sena-success {
+    background-color: var(--sena-verde);
+    border-color: var(--sena-verde);
+    color: white;
+}
+
+.btn-sena-success:hover {
+    background-color: #2E7D00;
+    border-color: #2E7D00;
+    color: white;
+}
+
+.text-sena-verde {
+    color: var(--sena-verde) !important;
+}

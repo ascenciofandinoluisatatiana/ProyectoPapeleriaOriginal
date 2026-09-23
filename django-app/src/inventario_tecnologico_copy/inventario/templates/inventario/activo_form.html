@@ -1,0 +1,638 @@
+{% extends 'inventario/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        Editar producto - {{ form.instance.nombre }}
+    {% else %}
+        Nuevo producto
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<!-- ENCABEZADO -->
+<div class="papeleria-page-header">
+
+    <div>
+        <span class="papeleria-kicker">
+            <i class="fas fa-pen-to-square"></i>
+            {% if form.instance.pk %}
+                Edición
+            {% else %}
+                Inventario
+            {% endif %}
+        </span>
+
+        <h1 class="papeleria-page-title">
+            {% if form.instance.pk %}
+                Editar producto
+            {% else %}
+                Nuevo producto
+            {% endif %}
+
+            <span class="title-decoration">♡</span>
+        </h1>
+
+        <p class="papeleria-page-subtitle">
+            {% if form.instance.pk %}
+                Actualiza la información de este producto.
+            {% else %}
+                Registra un nuevo producto en el inventario.
+            {% endif %}
+        </p>
+    </div>
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-12 col-xl-10 mx-auto">
+
+        <div class="papeleria-form-container">
+
+            <form method="post"
+                  enctype="multipart/form-data"
+                  novalidate>
+
+                {% csrf_token %}
+
+
+                <!-- ERRORES GENERALES -->
+                {% if form.non_field_errors %}
+
+                    <div class="papeleria-form-alert">
+
+                        <div class="papeleria-alert-icon">
+                            <i class="fas fa-circle-exclamation"></i>
+                        </div>
+
+                        <div>
+                            <strong>Revisa la información</strong>
+
+                            <div>
+                                {{ form.non_field_errors }}
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+
+                <!-- INFORMACIÓN BÁSICA -->
+                <div class="papeleria-form-section">
+
+                    <div class="papeleria-form-section-header">
+
+                        <div class="papeleria-form-section-icon pink">
+                            <i class="fas fa-box"></i>
+                        </div>
+
+                        <div>
+                            <h3>Información básica</h3>
+                            <p>Identifica el producto dentro del inventario.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="papeleria-form-section-body">
+
+                        <div class="row g-4">
+
+                            <div class="col-12 col-md-6">
+
+                                <label for="{{ form.codigo_inventario.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.codigo_inventario.label }}
+
+                                    <span class="required">*</span>
+
+                                </label>
+
+                                {{ form.codigo_inventario }}
+
+                                {% if form.codigo_inventario.help_text %}
+                                    <small class="papeleria-help-text">
+                                        {{ form.codigo_inventario.help_text }}
+                                    </small>
+                                {% endif %}
+
+                                {% if form.codigo_inventario.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.codigo_inventario.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="col-12 col-md-6">
+
+                                <label for="{{ form.nombre.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.nombre.label }}
+
+                                    <span class="required">*</span>
+
+                                </label>
+
+                                {{ form.nombre }}
+
+                                {% if form.nombre.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.nombre.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="col-12">
+
+                                <label for="{{ form.descripcion.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.descripcion.label }}
+
+                                </label>
+
+                                {{ form.descripcion }}
+
+                                {% if form.descripcion.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.descripcion.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CLASIFICACIÓN Y UBICACIÓN -->
+                <div class="papeleria-form-section">
+
+                    <div class="papeleria-form-section-header">
+
+                        <div class="papeleria-form-section-icon mint">
+                            <i class="fas fa-tags"></i>
+                        </div>
+
+                        <div>
+                            <h3>Clasificación y ubicación</h3>
+                            <p>Organiza el producto dentro del inventario.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="papeleria-form-section-body">
+
+                        <div class="row g-4">
+
+                            <div class="col-12 col-md-4">
+
+                                <label for="{{ form.categoria.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.categoria.label }}
+
+                                    <span class="required">*</span>
+
+                                </label>
+
+                                {{ form.categoria }}
+
+                                {% if form.categoria.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.categoria.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="col-12 col-md-4">
+
+                                <label for="{{ form.ubicacion.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.ubicacion.label }}
+
+                                </label>
+
+                                {{ form.ubicacion }}
+
+                                {% if form.ubicacion.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.ubicacion.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="col-12 col-md-4">
+
+                                <label for="{{ form.estado.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.estado.label }}
+
+                                    <span class="required">*</span>
+
+                                </label>
+
+                                {{ form.estado }}
+
+                                {% if form.estado.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.estado.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DETALLES DEL PRODUCTO -->
+                <div class="papeleria-form-section">
+
+                    <div class="papeleria-form-section-header">
+
+                        <div class="papeleria-form-section-icon lavender">
+                            <i class="fas fa-cube"></i>
+                        </div>
+
+                        <div>
+                            <h3>Detalles del producto</h3>
+                            <p>Agrega información específica del artículo.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="papeleria-form-section-body">
+
+                        <div class="row g-4">
+
+                            <div class="col-12 col-md-4">
+
+                                <label for="{{ form.marca.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.marca.label }}
+
+                                </label>
+
+                                {{ form.marca }}
+
+                                {% if form.marca.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.marca.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="col-12 col-md-4">
+
+                                <label for="{{ form.modelo.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.modelo.label }}
+
+                                </label>
+
+                                {{ form.modelo }}
+
+                                {% if form.modelo.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.modelo.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="col-12 col-md-4">
+
+                                <label for="{{ form.numero_serie.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.numero_serie.label }}
+
+                                </label>
+
+                                {{ form.numero_serie }}
+
+                                {% if form.numero_serie.help_text %}
+                                    <small class="papeleria-help-text">
+                                        {{ form.numero_serie.help_text }}
+                                    </small>
+                                {% endif %}
+
+                                {% if form.numero_serie.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.numero_serie.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMACIÓN FINANCIERA -->
+                <div class="papeleria-form-section">
+
+                    <div class="papeleria-form-section-header">
+
+                        <div class="papeleria-form-section-icon mint">
+                            <i class="fas fa-coins"></i>
+                        </div>
+
+                        <div>
+                            <h3>Información financiera</h3>
+                            <p>Registra los datos de adquisición del producto.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="papeleria-form-section-body">
+
+                        <div class="row g-4">
+
+                            <div class="col-12 col-md-6">
+
+                                <label for="{{ form.fecha_adquisicion.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.fecha_adquisicion.label }}
+
+                                </label>
+
+                                {{ form.fecha_adquisicion }}
+
+                                {% if form.fecha_adquisicion.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.fecha_adquisicion.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+
+                            <div class="col-12 col-md-6">
+
+                                <label for="{{ form.valor_adquisicion.id_for_label }}"
+                                       class="papeleria-form-label">
+
+                                    {{ form.valor_adquisicion.label }}
+
+                                </label>
+
+                                {{ form.valor_adquisicion }}
+
+                                {% if form.valor_adquisicion.help_text %}
+                                    <small class="papeleria-help-text">
+                                        {{ form.valor_adquisicion.help_text }}
+                                    </small>
+                                {% endif %}
+
+                                {% if form.valor_adquisicion.errors %}
+                                    <div class="papeleria-field-error">
+                                        {{ form.valor_adquisicion.errors }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- GESTIÓN Y RESPONSABILIDAD -->
+                <div class="papeleria-form-section">
+
+                    <div class="papeleria-form-section-header">
+
+                        <div class="papeleria-form-section-icon peach">
+                            <i class="fas fa-user"></i>
+                        </div>
+
+                        <div>
+                            <h3>Gestión y responsabilidad</h3>
+                            <p>Información relacionada con la persona responsable.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="papeleria-form-section-body">
+
+                        <div class="mb-4">
+
+                            <label for="{{ form.responsable.id_for_label }}"
+                                   class="papeleria-form-label">
+
+                                {{ form.responsable.label }}
+
+                            </label>
+
+                            {{ form.responsable }}
+
+                            {% if form.responsable.errors %}
+                                <div class="papeleria-field-error">
+                                    {{ form.responsable.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+
+                        <div>
+
+                            <label for="{{ form.observaciones.id_for_label }}"
+                                   class="papeleria-form-label">
+
+                                {{ form.observaciones.label }}
+
+                            </label>
+
+                            {{ form.observaciones }}
+
+                            {% if form.observaciones.errors %}
+                                <div class="papeleria-field-error">
+                                    {{ form.observaciones.errors }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MULTIMEDIA -->
+                <div class="papeleria-form-section">
+
+                    <div class="papeleria-form-section-header">
+
+                        <div class="papeleria-form-section-icon pink">
+                            <i class="fas fa-camera"></i>
+                        </div>
+
+                        <div>
+                            <h3>Fotografía</h3>
+                            <p>Agrega una imagen para identificar visualmente el producto.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="papeleria-form-section-body">
+
+                        <label for="{{ form.foto.id_for_label }}"
+                               class="papeleria-form-label">
+
+                            {{ form.foto.label }}
+
+                        </label>
+
+                        <div class="papeleria-file-input">
+                            {{ form.foto }}
+                        </div>
+
+                        {% if form.foto.help_text %}
+                            <small class="papeleria-help-text">
+                                {{ form.foto.help_text }}
+                            </small>
+                        {% endif %}
+
+                        {% if form.foto.errors %}
+                            <div class="papeleria-field-error">
+                                {{ form.foto.errors }}
+                            </div>
+                        {% endif %}
+
+
+                        {% if form.instance.foto %}
+
+                            <div class="papeleria-current-photo">
+
+                                <div class="papeleria-current-photo-title">
+                                    <i class="fas fa-image"></i>
+                                    Imagen actual
+                                </div>
+
+                                <img src="{{ form.instance.foto.url }}"
+                                     alt="Foto actual">
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+
+                <!-- ESTADO DEL SISTEMA -->
+                <div class="papeleria-form-section">
+
+                    <div class="papeleria-form-section-header">
+
+                        <div class="papeleria-form-section-icon lavender">
+                            <i class="fas fa-sliders"></i>
+                        </div>
+
+                        <div>
+                            <h3>Estado del sistema</h3>
+                            <p>Controla si el producto permanece activo.</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="papeleria-form-section-body">
+
+                        <label class="papeleria-switch-row"
+                               for="{{ form.activo.id_for_label }}">
+
+                            {{ form.activo }}
+
+                            <span>
+                                <strong>{{ form.activo.label }}</strong>
+                                <small>
+                                    El producto aparecerá como activo dentro del sistema.
+                                </small>
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCIONES -->
+                <div class="papeleria-form-actions">
+
+                    <a href="{% url 'inventario:activo_list' %}"
+                       class="papeleria-btn papeleria-btn-light">
+
+                        <i class="fas fa-arrow-left"></i>
+                        Cancelar
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="papeleria-btn papeleria-btn-primary">
+
+                        <i class="fas fa-save"></i>
+
+                        {% if form.instance.pk %}
+                            Actualizar producto
+                        {% else %}
+                            Crear producto
+                        {% endif %}
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

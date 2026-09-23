@@ -1,0 +1,514 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Dashboard - Inventario SENA{% endblock %}
+
+{% block content %}
+
+<div class="row g-4">
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="stat-icon"><i class="fas fa-laptop"></i></div>
+            <p class="stat-number">{{ total_activos }}</p>
+            <p class="stat-label">Activos</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="stat-icon"><i class="fas fa-tags"></i></div>
+            <p class="stat-number">{{ total_categorias }}</p>
+            <p class="stat-label">Categorías</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="stat-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <p class="stat-number">{{ total_ubicaciones }}</p>
+            <p class="stat-label">Ubicaciones</p>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card stat-card">
+            <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+            <p class="stat-number">${{ valor_total|floatformat:0 }}</p>
+            <p class="stat-label">Valor Total</p>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4 g-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">Activos por Estado</div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <thead><tr><th>Estado</th><th>Cantidad</th></tr></thead>
+                    <tbody>
+                        {% for est in activos_por_estado %}
+                        <tr>
+                            <td>{{ est.nombre }}</td>
+                            <td><span class="badge" style="background-color: {{ est.color }};">{{ est.cantidad }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">Top 5 Categorías</div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <thead><tr><th>Categoría</th><th>Cantidad</th></tr></thead>
+                    <tbody>
+                        {% for cat in top_categorias %}
+                        <tr>
+                            <td>{{ cat.nombre }}</td>
+                            <td><span class="badge bg-secondary">{{ cat.cantidad_activos }}</span></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4 g-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-info text-white">Últimos Movimientos</div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for mov in ultimos_movimientos %}
+                    <li class="list-group-item">
+                        <strong>{{ mov.activo.codigo_inventario }}</strong>:
+                        {{ mov.ubicacion_origen.nombre|default:"N/A" }} → {{ mov.ubicacion_destino.nombre }}
+                        <small class="text-muted">({{ mov.fecha_movimiento|date:"d/m/Y H:i" }})</small>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-muted">Sin movimientos registrados</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-warning">Mantenimientos Pendientes</div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for mant in mantenimientos_pendientes %}
+                    <li class="list-group-item">
+                        <strong>{{ mant.activo.codigo_inventario }}</strong>:
+                        {{ mant.get_tipo_display }} - {{ mant.get_estado_mantenimiento_display }}
+                        <small class="text-muted">({{ mant.fecha_inicio|date:"d/m/Y" }})</small>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-muted">Sin mantenimientos pendientes</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4 g-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+                Actividad Reciente
+                <a href="{% url 'inventario:log_list' %}" class="btn btn-sm btn-light">Ver todo</a>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    {% for log in actividad_reciente %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>
+                            <strong>{{ log.usuario_nombre }}</strong>
+                            {{ log.descripcion|truncatewords:12 }}
+                            <small class="text-muted">({{ log.fecha_hora|date:"d/m/Y H:i" }})</small>
+                        </span>
+                        <span class="badge bg-secondary">{{ log.get_accion_display }}</span>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-muted">Sin actividad registrada</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- =========================================
+    SECCIÓN DE GRÁFICOS CON CHART.JS
+    ========================================= -->
+
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-line"></i>
+                    Visualización de Datos
+                </h5>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fila 1: Pie y Doughnut -->
+<div class="row mb-4">
+    <!-- Gráfico Pie - Categorías -->
+    <div class="col-xl-6 mb-3">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    Activos por Categoría
+                </h5>
+            </div>
+            <div class="card-body">
+                <div style="height: 350px; position: relative;">
+                    <canvas id="categoriaChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico Doughnut - Ubicaciones -->
+    <div class="col-xl-6 mb-3">
+        <div class="card h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    Activos por Ubicación
+                </h5>
+            </div>
+            <div class="card-body">
+                <div style="height: 350px; position: relative;">
+                    <canvas id="ubicacionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Fila 2: Bar y Horizontal Bar -->
+<div class="row mb-4">
+    <!-- Gráfico Bar - Estados -->
+    <div class="col-xl-6 mb-3">
+        <div class="card h-100">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    Activos por Estado
+                </h5>
+            </div>
+            <div class="card-body">
+                <div style="height: 350px; position: relative;">
+                    <canvas id="estadoChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gráfico Horizontal Bar - Valor por Categoría -->
+    <div class="col-xl-6 mb-3">
+        <div class="card h-100">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    Valor por Categoría
+                </h5>
+            </div>
+            <div class="card-body">
+                <div style="height: 350px; position: relative;">
+                    <canvas id="valorChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =========================================
+    SECCIÓN DE REPORTES Y EXPORTACIONES
+    ========================================= -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-download"></i>
+                        Reportes y Exportaciones
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-3">
+                            <a href="{% url 'inventario:reporte_inventario_pdf' %}" class="btn btn-outline-danger w-100">
+                                <i class="fas fa-file-pdf"></i> Reporte General (PDF)
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'inventario:reporte_ubicaciones_pdf' %}" class="btn btn-outline-danger w-100">
+                                <i class="fas fa-file-pdf"></i> Activos por Ubicación (PDF)
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'inventario:exportar_activos_excel' %}" class="btn btn-outline-success w-100">
+                                <i class="fas fa-file-excel"></i> Activos (Excel)
+                            </a>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="{% url 'inventario:exportar_logs_excel' %}" class="btn btn-outline-success w-100">
+                                <i class="fas fa-file-excel"></i> Logs de Auditoría (Excel)
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+<!-- Chart.js desde CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+// =========================================
+// CONFIGURACIÓN GLOBAL DE CHART.JS
+// =========================================
+
+Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+Chart.defaults.font.size = 12;
+
+// Colores SENA
+const coloresSENA = [
+    '#FF5722',  // Naranja SENA
+    '#39A900',  // Verde SENA
+    '#00324D',  // Azul oscuro SENA
+    '#2196F3',  // Azul
+    '#FF9800',  // Naranja claro
+    '#9C27B0',  // Púrpura
+    '#4CAF50',  // Verde
+    '#F44336',  // Rojo
+];
+
+// =========================================
+// OBTENER DATOS DE LA API
+// =========================================
+
+fetch('/api/activos/estadisticas/')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al obtener estadísticas');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Estadísticas cargadas:', data);
+
+        // =========================================
+        // GRÁFICO 1: PIE - CATEGORÍAS
+        // =========================================
+
+        const ctx1 = document.getElementById('categoriaChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: data.activos_por_categoria.map(item => item.categoria__nombre),
+                datasets: [{
+                    label: 'Cantidad de Activos',
+                    data: data.activos_por_categoria.map(item => item.cantidad),
+                    backgroundColor: coloresSENA,
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribución por Categoría',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed;
+                                label += ' activos';
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // =========================================
+        // GRÁFICO 2: DOUGHNUT - UBICACIONES
+        // =========================================
+
+        const ctx2 = document.getElementById('ubicacionChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: data.activos_por_ubicacion.map(item => item.ubicacion__nombre),
+                datasets: [{
+                    label: 'Cantidad de Activos',
+                    data: data.activos_por_ubicacion.map(item => item.cantidad),
+                    backgroundColor: coloresSENA,
+                    borderColor: '#fff',
+                    borderWidth: 2,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Distribución por Ubicación',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        });
+
+        // =========================================
+        // GRÁFICO 3: BAR - ESTADOS
+        // =========================================
+
+        const ctx3 = document.getElementById('estadoChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: data.activos_por_estado.map(item => item.estado__nombre),
+                datasets: [{
+                    label: 'Cantidad de Activos',
+                    data: data.activos_por_estado.map(item => item.cantidad),
+                    backgroundColor: coloresSENA,
+                    borderColor: coloresSENA,
+                    borderWidth: 1,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Activos por Estado',
+                        font: {
+                            size: 16,
+                            weight: 'bold'
+                        }
+                    }
+                }
+            }
+        });
+
+        // =========================================
+        // GRÁFICO 4: HORIZONTAL BAR - VALOR
+        // =========================================
+
+        // Obtener valores por categoría
+        fetch('/api/activos/por_categoria/')
+            .then(response => response.json())
+            .then(categorias => {
+                const ctx4 = document.getElementById('valorChart').getContext('2d');
+                new Chart(ctx4, {
+                    type: 'bar',
+                    data: {
+                        labels: categorias.map(item => item.nombre),
+                        datasets: [{
+                            label: 'Valor Total ($)',
+                            data: categorias.map(item => item.valor_total || 0),
+                            backgroundColor: '#FF9800',
+                            borderColor: '#F57C00',
+                            borderWidth: 1,
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',  // Horizontal
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return '$' + value.toLocaleString();
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Valor Total por Categoría',
+                                font: {
+                                    size: 16,
+                                    weight: 'bold'
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return 'Valor: $' + context.parsed.x.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+    })
+    .catch(error => {
+        console.error('Error al cargar estadísticas:', error);
+        alert('Error al cargar gráficos. Por favor recarga la página.');
+    });
+
+</script>
+{% endblock %}

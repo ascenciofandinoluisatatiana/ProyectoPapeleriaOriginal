@@ -1,0 +1,38 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Ubicaciones - Inventario SENA{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-map-marker-alt"></i> Ubicaciones</h1>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ubi in ubicaciones %}
+                <tr>
+                    <td>{{ ubi.codigo }}</td>
+                    <td>{{ ubi.nombre }}</td>
+                    <td>{{ ubi.get_tipo_display }}</td>
+                    <td>
+                        <span class="badge bg-success">
+                            {{ ubi.cantidad_activos }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

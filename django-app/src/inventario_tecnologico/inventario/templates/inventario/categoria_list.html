@@ -1,0 +1,48 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Categorías - Inventario SENA{% endblock %}
+
+{% block content %}
+<div class="page-header d-flex justify-content-between align-items-center">
+    <h1><i class="fas fa-tags"></i> Categorías</h1>
+    <a href="{% url 'inventario:categoria_create' %}" class="btn btn-sena-verde">
+        <i class="fas fa-plus"></i> Nueva Categoría
+    </a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Cantidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cat in categorias %}
+                <tr>
+                    <td>{{ cat.codigo }}</td>
+                    <td>{{ cat.nombre }}</td>
+                    <td>
+                        <span class="badge bg-primary">
+                            {{ cat.cantidad_activos }}
+                        </span>
+                    </td>
+                    <td>
+                        <a href="{% url 'inventario:categoria_update' cat.pk %}" class="btn btn-sm btn-outline-primary">
+                            <i class="fas fa-edit"></i> Editar
+                        </a>
+                        <a href="{% url 'inventario:categoria_delete' cat.pk %}" class="btn btn-sm btn-outline-danger">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

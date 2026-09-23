@@ -1,0 +1,209 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Crear Cuenta - Mi Papelería{% endblock %}
+
+{% block content %}
+
+<div class="papeleria-auth-page papeleria-register-page">
+
+    <div class="papeleria-register-card">
+
+        <div class="papeleria-auth-icon papeleria-auth-icon-lavender">
+            <i class="fas fa-user-plus"></i>
+        </div>
+
+        <span class="papeleria-kicker">
+            Nueva cuenta
+        </span>
+
+        <h1 class="papeleria-auth-title">
+            Crear cuenta
+        </h1>
+
+        <p class="papeleria-auth-subtitle">
+            Regístrate para comenzar a gestionar tu inventario.
+        </p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+
+                <div class="papeleria-form-alert">
+
+                    <div class="papeleria-alert-icon">
+                        <i class="fas fa-circle-exclamation"></i>
+                    </div>
+
+                    <div>
+                        {{ form.non_field_errors }}
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+            <div class="row g-4">
+
+                <div class="col-12 col-md-6">
+
+                    <label for="{{ form.first_name.id_for_label }}"
+                           class="papeleria-form-label">
+
+                        Nombre
+                        <span class="required">*</span>
+
+                    </label>
+
+                    {{ form.first_name }}
+
+                    {% if form.first_name.errors %}
+                        <div class="papeleria-field-error">
+                            {{ form.first_name.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-12 col-md-6">
+
+                    <label for="{{ form.last_name.id_for_label }}"
+                           class="papeleria-form-label">
+
+                        Apellido
+                        <span class="required">*</span>
+
+                    </label>
+
+                    {{ form.last_name }}
+
+                    {% if form.last_name.errors %}
+                        <div class="papeleria-field-error">
+                            {{ form.last_name.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-12">
+
+                    <label for="{{ form.username.id_for_label }}"
+                           class="papeleria-form-label">
+
+                        Usuario
+                        <span class="required">*</span>
+
+                    </label>
+
+                    {{ form.username }}
+
+                    <small class="papeleria-help-text">
+                        150 caracteres o menos. Solo letras, dígitos y @/./+/-/_.
+                    </small>
+
+                    {% if form.username.errors %}
+                        <div class="papeleria-field-error">
+                            {{ form.username.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-12">
+
+                    <label for="{{ form.email.id_for_label }}"
+                           class="papeleria-form-label">
+
+                        Correo electrónico
+                        <span class="required">*</span>
+
+                    </label>
+
+                    {{ form.email }}
+
+                    {% if form.email.errors %}
+                        <div class="papeleria-field-error">
+                            {{ form.email.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-12">
+
+                    <label for="{{ form.password1.id_for_label }}"
+                           class="papeleria-form-label">
+
+                        Contraseña
+                        <span class="required">*</span>
+
+                    </label>
+
+                    {{ form.password1 }}
+
+                    <small class="papeleria-help-text">
+                        Mínimo 8 caracteres. No puede ser completamente numérica.
+                    </small>
+
+                    {% if form.password1.errors %}
+                        <div class="papeleria-field-error">
+                            {{ form.password1.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+                <div class="col-12">
+
+                    <label for="{{ form.password2.id_for_label }}"
+                           class="papeleria-form-label">
+
+                        Confirmar contraseña
+                        <span class="required">*</span>
+
+                    </label>
+
+                    {{ form.password2 }}
+
+                    {% if form.password2.errors %}
+                        <div class="papeleria-field-error">
+                            {{ form.password2.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <button type="submit"
+                    class="papeleria-btn papeleria-btn-primary papeleria-auth-submit">
+
+                <i class="fas fa-user-plus"></i>
+                Crear mi cuenta
+
+            </button>
+
+        </form>
+
+        <div class="papeleria-auth-divider">
+            <span></span>
+            <small>o</small>
+            <span></span>
+        </div>
+
+        <p class="papeleria-auth-register">
+
+            ¿Ya tienes cuenta?
+
+            <a href="{% url 'inventario:login' %}">
+                Inicia sesión aquí
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,206 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Detalle de Auditoría - Mi Papelería{% endblock %}
+
+{% block content %}
+
+<div class="papeleria-page-header">
+
+    <div>
+
+        <span class="papeleria-kicker">
+            <i class="fas fa-clipboard-list"></i>
+            Auditoría
+        </span>
+
+        <h1 class="papeleria-page-title">
+            Detalle de actividad
+            <span class="title-decoration">♡</span>
+        </h1>
+
+        <p class="papeleria-page-subtitle">
+            Consulta toda la información registrada para esta actividad.
+        </p>
+
+    </div>
+
+    <div class="papeleria-page-actions">
+
+        <a href="{% url 'inventario:log_list' %}"
+           class="papeleria-btn papeleria-btn-light">
+
+            <i class="fas fa-arrow-left"></i>
+            Volver
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="papeleria-card">
+
+    <div class="papeleria-card-header">
+
+        <div class="papeleria-card-icon lavender">
+            <i class="fas fa-clipboard-check"></i>
+        </div>
+
+        <div>
+            <h3>Información del registro</h3>
+            <p>Datos generales de la actividad realizada.</p>
+        </div>
+
+    </div>
+
+    <div class="papeleria-card-body">
+
+        <div class="row g-4">
+
+            <div class="col-12 col-md-6">
+
+                <div class="papeleria-info-item">
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-calendar"></i>
+                        Fecha
+                    </span>
+
+                    <strong>
+                        {{ log.fecha_hora|date:"d/m/Y H:i:s" }}
+                    </strong>
+                </div>
+
+                <div class="papeleria-info-item">
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-user"></i>
+                        Usuario
+                    </span>
+
+                    <strong>
+                        {{ log.usuario_nombre }}
+                    </strong>
+                </div>
+
+                <div class="papeleria-info-item">
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-bolt"></i>
+                        Acción
+                    </span>
+
+                    <strong>
+                        {{ log.get_accion_display }}
+                    </strong>
+                </div>
+
+                <div class="papeleria-info-item">
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-cube"></i>
+                        Modelo afectado
+                    </span>
+
+                    <strong>
+                        {{ log.modelo }}
+                    </strong>
+                </div>
+
+            </div>
+
+            <div class="col-12 col-md-6">
+
+                <div class="papeleria-info-item">
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-fingerprint"></i>
+                        Objeto
+                    </span>
+
+                    <strong>
+                        {{ log.objeto_repr|default:"N/A" }}
+                    </strong>
+                </div>
+
+                <div class="papeleria-info-item">
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-network-wired"></i>
+                        Dirección IP
+                    </span>
+
+                    <strong>
+                        {{ log.ip_address|default:"N/A" }}
+                    </strong>
+                </div>
+
+                <div class="papeleria-info-item">
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-globe"></i>
+                        Navegador
+                    </span>
+
+                    <strong>
+                        {{ log.user_agent|truncatechars:60|default:"N/A" }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="papeleria-description">
+
+            <span class="papeleria-info-label">
+                <i class="fas fa-align-left"></i>
+                Descripción
+            </span>
+
+            <p>
+                {{ log.descripcion }}
+            </p>
+
+        </div>
+
+        {% if log.datos_anteriores %}
+
+        <div class="papeleria-audit-data">
+
+            <div class="papeleria-audit-data-header">
+                <div class="audit-data-icon peach">
+                    <i class="fas fa-clock-rotate-left"></i>
+                </div>
+
+                <div>
+                    <strong>Datos anteriores</strong>
+                    <span>Información registrada antes del cambio.</span>
+                </div>
+            </div>
+
+            <pre>{{ log.datos_anteriores }}</pre>
+
+        </div>
+
+        {% endif %}
+
+        {% if log.datos_nuevos %}
+
+        <div class="papeleria-audit-data">
+
+            <div class="papeleria-audit-data-header">
+                <div class="audit-data-icon mint">
+                    <i class="fas fa-circle-plus"></i>
+                </div>
+
+                <div>
+                    <strong>Datos nuevos</strong>
+                    <span>Información registrada después del cambio.</span>
+                </div>
+            </div>
+
+            <pre>{{ log.datos_nuevos }}</pre>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

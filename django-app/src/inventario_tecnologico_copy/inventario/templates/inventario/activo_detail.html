@@ -1,0 +1,585 @@
+{% extends 'inventario/base.html' %}
+{% load static %}
+
+{% block title %}{{ activo.nombre }} - Mi Papelería{% endblock %}
+
+{% block content %}
+
+<!-- ENCABEZADO -->
+<div class="papeleria-page-header">
+    <div>
+        <span class="papeleria-kicker">
+            <i class="fas fa-box-open"></i> Detalle del producto
+        </span>
+
+        <h1 class="papeleria-page-title">
+            {{ activo.nombre }}
+        </h1>
+
+        <p class="papeleria-page-subtitle">
+            Consulta toda la información de este producto del inventario.
+        </p>
+    </div>
+
+    <div class="papeleria-page-actions">
+        <a href="{% url 'inventario:activo_update' activo.pk %}"
+           class="papeleria-btn papeleria-btn-primary">
+            <i class="fas fa-pen"></i>
+            Editar
+        </a>
+
+        <a href="{% url 'inventario:activo_delete' activo.pk %}"
+           class="papeleria-btn papeleria-btn-danger">
+            <i class="fas fa-trash"></i>
+            Eliminar
+        </a>
+    </div>
+</div>
+
+
+<!-- CONTENIDO PRINCIPAL -->
+<div class="row g-4">
+
+    <!-- COLUMNA PRINCIPAL -->
+    <div class="col-12 col-xl-8">
+
+        <!-- INFORMACIÓN GENERAL -->
+        <div class="papeleria-card mb-4">
+
+            <div class="papeleria-card-header">
+                <div class="papeleria-card-icon pink">
+                    <i class="fas fa-box"></i>
+                </div>
+
+                <div>
+                    <h3>Información del producto</h3>
+                    <p>Datos generales del artículo</p>
+                </div>
+            </div>
+
+            <div class="papeleria-card-body">
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="papeleria-info-item">
+                            <span class="papeleria-info-label">
+                                <i class="fas fa-barcode"></i>
+                                Código de inventario
+                            </span>
+
+                            <strong>
+                                {{ activo.codigo_inventario }}
+                            </strong>
+                        </div>
+
+                        <div class="papeleria-info-item">
+                            <span class="papeleria-info-label">
+                                <i class="fas fa-box"></i>
+                                Nombre
+                            </span>
+
+                            <strong>
+                                {{ activo.nombre }}
+                            </strong>
+                        </div>
+
+                        <div class="papeleria-info-item">
+                            <span class="papeleria-info-label">
+                                <i class="fas fa-tags"></i>
+                                Categoría
+                            </span>
+
+                            <strong>
+                                {{ activo.categoria.nombre }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="papeleria-info-item">
+                            <span class="papeleria-info-label">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Ubicación
+                            </span>
+
+                            <strong>
+                                {{ activo.ubicacion.nombre|default:"No asignada" }}
+                            </strong>
+                        </div>
+
+                        <div class="papeleria-info-item">
+                            <span class="papeleria-info-label">
+                                <i class="fas fa-trademark"></i>
+                                Marca
+                            </span>
+
+                            <strong>
+                                {{ activo.marca|default:"N/A" }}
+                            </strong>
+                        </div>
+
+                        <div class="papeleria-info-item">
+                            <span class="papeleria-info-label">
+                                <i class="fas fa-cube"></i>
+                                Modelo
+                            </span>
+
+                            <strong>
+                                {{ activo.modelo|default:"N/A" }}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ESTADO -->
+                <div class="papeleria-status-box">
+
+                    <div>
+                        <span class="papeleria-info-label">
+                            <i class="fas fa-circle-check"></i>
+                            Estado actual
+                        </span>
+
+                        <strong>{{ activo.estado.nombre }}</strong>
+                    </div>
+
+                    <span class="papeleria-status-badge"
+                          style="--estado-color: {{ activo.estado.color }};">
+                        {{ activo.estado.nombre }}
+                    </span>
+
+                </div>
+
+
+                <!-- SERIAL -->
+                <div class="papeleria-info-item mt-4">
+
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-fingerprint"></i>
+                        Número de serie
+                    </span>
+
+                    <strong>
+                        {{ activo.numero_serie|default:"N/A" }}
+                    </strong>
+
+                </div>
+
+
+                {% if activo.descripcion %}
+
+                <div class="papeleria-description">
+
+                    <span class="papeleria-info-label">
+                        <i class="fas fa-align-left"></i>
+                        Descripción
+                    </span>
+
+                    <p>
+                        {{ activo.descripcion }}
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+
+        <!-- INFORMACIÓN FINANCIERA -->
+        <div class="papeleria-card mb-4">
+
+            <div class="papeleria-card-header">
+
+                <div class="papeleria-card-icon mint">
+                    <i class="fas fa-coins"></i>
+                </div>
+
+                <div>
+                    <h3>Información financiera</h3>
+                    <p>Datos relacionados con la adquisición</p>
+                </div>
+
+            </div>
+
+            <div class="papeleria-card-body">
+
+                <div class="row g-4">
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="papeleria-finance-box">
+
+                            <span>
+                                <i class="fas fa-calendar"></i>
+                                Fecha de adquisición
+                            </span>
+
+                            <strong>
+                                {% if activo.fecha_adquisicion %}
+                                    {{ activo.fecha_adquisicion|date:"d/m/Y" }}
+                                {% else %}
+                                    No registrada
+                                {% endif %}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-12 col-md-6">
+
+                        <div class="papeleria-finance-box">
+
+                            <span>
+                                <i class="fas fa-dollar-sign"></i>
+                                Valor de adquisición
+                            </span>
+
+                            <strong class="papeleria-price">
+
+                                {% if activo.valor_adquisicion %}
+                                    ${{ activo.valor_adquisicion|floatformat:2 }}
+                                {% else %}
+                                    No registrado
+                                {% endif %}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- MOVIMIENTOS -->
+        <div class="papeleria-card mb-4">
+
+            <div class="papeleria-card-header">
+
+                <div class="papeleria-card-icon lavender">
+                    <i class="fas fa-right-left"></i>
+                </div>
+
+                <div>
+                    <h3>Historial de movimientos</h3>
+                    <p>Registro de cambios de ubicación</p>
+                </div>
+
+            </div>
+
+
+            <div class="papeleria-card-body">
+
+                {% if movimientos %}
+
+                <div class="table-responsive papeleria-table-wrapper">
+
+                    <table class="table papeleria-table align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Origen</th>
+                                <th></th>
+                                <th>Destino</th>
+                                <th>Usuario</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for mov in movimientos %}
+
+                            <tr>
+
+                                <td>
+                                    {{ mov.fecha_movimiento|date:"d/m/Y H:i" }}
+                                </td>
+
+                                <td>
+                                    {{ mov.ubicacion_origen.nombre|default:"N/A" }}
+                                </td>
+
+                                <td class="text-center">
+                                    <span class="movement-arrow">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </span>
+                                </td>
+
+                                <td>
+                                    {{ mov.ubicacion_destino.nombre }}
+                                </td>
+
+                                <td>
+                                    {{ mov.usuario }}
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                {% else %}
+
+                <div class="papeleria-empty-state">
+                    <i class="fas fa-route"></i>
+
+                    <strong>No hay movimientos registrados</strong>
+
+                    <span>
+                        Este producto todavía no tiene movimientos.
+                    </span>
+                </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+
+        <!-- MANTENIMIENTOS -->
+        <div class="papeleria-card mb-4">
+
+            <div class="papeleria-card-header">
+
+                <div class="papeleria-card-icon peach">
+                    <i class="fas fa-screwdriver-wrench"></i>
+                </div>
+
+                <div>
+                    <h3>Mantenimientos</h3>
+                    <p>Historial de mantenimiento del producto</p>
+                </div>
+
+            </div>
+
+
+            <div class="papeleria-card-body">
+
+                {% if mantenimientos %}
+
+                <div class="table-responsive papeleria-table-wrapper">
+
+                    <table class="table papeleria-table align-middle">
+
+                        <thead>
+                            <tr>
+                                <th>Tipo</th>
+                                <th>Fecha de inicio</th>
+                                <th>Técnico</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for mant in mantenimientos %}
+
+                            <tr>
+
+                                <td>
+                                    {{ mant.get_tipo_display }}
+                                </td>
+
+                                <td>
+                                    {{ mant.fecha_inicio|date:"d/m/Y" }}
+                                </td>
+
+                                <td>
+                                    {{ mant.tecnico }}
+                                </td>
+
+                                <td>
+                                    <span class="papeleria-soft-badge">
+                                        {{ mant.get_estado_mantenimiento_display }}
+                                    </span>
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                {% else %}
+
+                <div class="papeleria-empty-state">
+                    <i class="fas fa-screwdriver-wrench"></i>
+
+                    <strong>No hay mantenimientos registrados</strong>
+
+                    <span>
+                        Este producto no tiene mantenimientos registrados.
+                    </span>
+                </div>
+
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- COLUMNA LATERAL -->
+    <div class="col-12 col-xl-4">
+
+        <!-- FOTO -->
+        <div class="papeleria-card mb-4">
+
+            <div class="papeleria-photo">
+
+                {% if activo.foto %}
+
+                    <img src="{{ activo.foto.url }}"
+                         alt="{{ activo.nombre }}">
+
+                {% else %}
+
+                    <div class="papeleria-no-photo">
+
+                        <div class="papeleria-no-photo-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+
+                        <strong>Sin fotografía</strong>
+
+                        <span>
+                            Este producto no tiene una imagen registrada.
+                        </span>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        <!-- RESPONSABLE -->
+        <div class="papeleria-card mb-4">
+
+            <div class="papeleria-mini-header">
+
+                <div class="papeleria-mini-icon pink">
+                    <i class="fas fa-user"></i>
+                </div>
+
+                <strong>Responsable</strong>
+
+            </div>
+
+            <div class="papeleria-mini-body">
+
+                {{ activo.responsable|default:"No asignado" }}
+
+            </div>
+
+        </div>
+
+
+        <!-- OBSERVACIONES -->
+        {% if activo.observaciones %}
+
+        <div class="papeleria-card mb-4">
+
+            <div class="papeleria-mini-header">
+
+                <div class="papeleria-mini-icon lavender">
+                    <i class="fas fa-note-sticky"></i>
+                </div>
+
+                <strong>Observaciones</strong>
+
+            </div>
+
+            <div class="papeleria-mini-body">
+
+                {{ activo.observaciones }}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- INFORMACIÓN DEL SISTEMA -->
+        <div class="papeleria-card">
+
+            <div class="papeleria-mini-header">
+
+                <div class="papeleria-mini-icon mint">
+                    <i class="fas fa-clock"></i>
+                </div>
+
+                <strong>Información del sistema</strong>
+
+            </div>
+
+            <div class="papeleria-system-info">
+
+                <div>
+                    <span>Creado</span>
+
+                    <strong>
+                        {{ activo.fecha_creacion|date:"d/m/Y H:i" }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Última modificación</span>
+
+                    <strong>
+                        {{ activo.fecha_modificacion|date:"d/m/Y H:i" }}
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- VOLVER -->
+<div class="papeleria-back">
+
+    <a href="{% url 'inventario:activo_list' %}"
+       class="papeleria-btn papeleria-btn-light">
+
+        <i class="fas fa-arrow-left"></i>
+        Volver al inventario
+
+    </a>
+
+</div>
+
+{% endblock %}

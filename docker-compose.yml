@@ -1,0 +1,71 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: inventario_tech_db
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./inventario_tech_db.sql:/docker-entrypoint-initdb.d/inventario_tech_db.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - red_apps
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+    ports:
+      - "8081:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - red_apps
+
+  django-app:
+    build:
+      context: ./django-app
+    container_name: django_app
+    restart: unless-stopped
+    command: python inventario_tecnologico/manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./django-app/src:/app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - red_apps
+
+  django-app-copy:
+    build:
+      context: ./django-app
+      dockerfile: Dockerfile.copy
+    container_name: django_app_copy
+    restart: unless-stopped
+    command: python inventario_tecnologico_copy/manage.py runserver 0.0.0.0:8001
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./django-app/src:/app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - red_apps
+
+networks:
+  red_apps:
+
+volumes:
+  mysql_data:

@@ -1,0 +1,373 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Auditoría - Mi Papelería{% endblock %}
+
+{% block content %}
+
+<div class="papeleria-page-header">
+
+    <div>
+
+        <span class="papeleria-kicker">
+            <i class="fas fa-clipboard-list"></i>
+            Seguridad
+        </span>
+
+        <h1 class="papeleria-page-title">
+            Auditoría del sistema
+            <span class="title-decoration">♡</span>
+        </h1>
+
+        <p class="papeleria-page-subtitle">
+            Consulta las actividades realizadas dentro del sistema.
+        </p>
+
+    </div>
+
+    <div class="papeleria-page-actions">
+
+        <a href="{% url 'inventario:exportar_logs_excel' %}"
+           class="papeleria-btn papeleria-btn-secondary">
+
+            <i class="fas fa-file-excel"></i>
+            Exportar
+
+        </a>
+
+    </div>
+
+</div>
+
+<div class="card papeleria-filter-card mb-4">
+
+    <div class="card-body">
+
+        <div class="papeleria-section-title">
+
+            <div class="section-icon section-icon-lavender">
+                <i class="fas fa-sliders-h"></i>
+            </div>
+
+            <div>
+                <h5>Filtrar actividad</h5>
+                <small>
+                    Busca registros por usuario, acción, modelo o fecha.
+                </small>
+            </div>
+
+        </div>
+
+        <form method="get" class="row g-3 align-items-end">
+
+            <div class="col-md-3">
+
+                <label class="form-label papeleria-label">
+                    Usuario
+                </label>
+
+                <div class="papeleria-input-group">
+
+                    <i class="fas fa-user"></i>
+
+                    <input type="text"
+                           name="usuario"
+                           class="form-control"
+                           placeholder="Usuario..."
+                           value="{{ filtro_usuario }}">
+
+                </div>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <label class="form-label papeleria-label">
+                    Acción
+                </label>
+
+                <select name="accion"
+                        class="form-select papeleria-select">
+
+                    <option value="">
+                        Todas las acciones
+                    </option>
+
+                    {% for codigo, etiqueta in acciones %}
+
+                    <option value="{{ codigo }}"
+                            {% if filtro_accion == codigo %}selected{% endif %}>
+
+                        {{ etiqueta }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <label class="form-label papeleria-label">
+                    Modelo
+                </label>
+
+                <select name="modelo"
+                        class="form-select papeleria-select">
+
+                    <option value="">
+                        Todos los modelos
+                    </option>
+
+                    {% for m in modelos %}
+
+                    <option value="{{ m }}"
+                            {% if filtro_modelo == m %}selected{% endif %}>
+
+                        {{ m }}
+
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="col-md-2">
+
+                <label class="form-label papeleria-label">
+                    Desde
+                </label>
+
+                <input type="date"
+                       name="fecha_desde"
+                       class="form-control papeleria-date-input"
+                       value="{{ filtro_fecha_desde }}">
+
+            </div>
+
+            <div class="col-md-2">
+
+                <label class="form-label papeleria-label">
+                    Hasta
+                </label>
+
+                <input type="date"
+                       name="fecha_hasta"
+                       class="form-control papeleria-date-input"
+                       value="{{ filtro_fecha_hasta }}">
+
+            </div>
+
+            <div class="col-md-1">
+
+                <button type="submit"
+                        class="btn papeleria-filter-btn w-100">
+
+                    <i class="fas fa-search"></i>
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="card papeleria-products-card">
+
+    <div class="card-body">
+
+        <div class="papeleria-table-header">
+
+            <div class="papeleria-section-title mb-0">
+
+                <div class="section-icon section-icon-pink">
+                    <i class="fas fa-clock-rotate-left"></i>
+                </div>
+
+                <div>
+                    <h5>Registro de actividad</h5>
+                    <small>
+                        Historial de acciones realizadas en el sistema.
+                    </small>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="table-responsive papeleria-table-wrapper">
+
+            <table class="table papeleria-table papeleria-audit-table align-middle">
+
+                <thead>
+
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Acción</th>
+                        <th>Modelo</th>
+                        <th>Descripción</th>
+                        <th class="text-end">Detalle</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for log in logs %}
+
+                    <tr>
+
+                        <td>
+                            <span class="audit-date">
+                                {{ log.fecha_hora|date:"d/m/Y H:i" }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="audit-user">
+                                <div class="audit-user-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+
+                                <strong>
+                                    {{ log.usuario_nombre }}
+                                </strong>
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="audit-action-badge">
+                                {{ log.get_accion_display }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="audit-model">
+                                {{ log.modelo }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class="audit-description">
+                                {{ log.descripcion|truncatewords:10 }}
+                            </span>
+                        </td>
+
+                        <td class="text-end">
+
+                            <a href="{% url 'inventario:log_detail' log.pk %}"
+                               class="papeleria-view-btn">
+
+                                <i class="fas fa-eye"></i>
+                                Ver
+
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="6">
+
+                            <div class="papeleria-empty-state">
+
+                                <div class="empty-icon">
+                                    <i class="fas fa-clipboard-list"></i>
+                                </div>
+
+                                <h5>No hay registros de auditoría</h5>
+
+                                <p>
+                                    Todavía no se han registrado actividades.
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% if is_paginated %}
+
+        <div class="papeleria-pagination">
+
+            <div class="pagination-info">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </div>
+
+            <nav aria-label="Paginación de auditoría">
+
+                <ul class="pagination mb-0">
+
+                    {% if page_obj.has_previous %}
+
+                    <li class="page-item">
+
+                        <a class="page-link"
+                           href="?page={{ page_obj.previous_page_number }}">
+
+                            <i class="fas fa-chevron-left"></i>
+                            Anterior
+
+                        </a>
+
+                    </li>
+
+                    {% endif %}
+
+                    <li class="page-item active">
+
+                        <span class="page-link">
+                            {{ page_obj.number }}
+                        </span>
+
+                    </li>
+
+                    {% if page_obj.has_next %}
+
+                    <li class="page-item">
+
+                        <a class="page-link"
+                           href="?page={{ page_obj.next_page_number }}">
+
+                            Siguiente
+                            <i class="fas fa-chevron-right"></i>
+
+                        </a>
+
+                    </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

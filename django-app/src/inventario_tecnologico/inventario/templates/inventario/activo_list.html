@@ -1,0 +1,95 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Activos - Inventario SENA{% endblock %}
+
+{% block content %}
+<div class="page-header d-flex justify-content-between align-items-center">
+    <h1><i class="fas fa-boxes"></i> Activos</h1>
+    <div>
+        <a href="{% url 'inventario:exportar_activos_excel' %}" class="btn btn-outline-success">
+            <i class="fas fa-file-excel"></i> Exportar a Excel
+        </a>
+        <a href="{% url 'inventario:activo_create' %}" class="btn btn-sena-success">
+            <i class="fas fa-plus"></i> Crear Nuevo Activo
+        </a>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" name="search" class="form-control" placeholder="Código, nombre o marca" value="{{ search }}">
+            </div>
+            <div class="col-md-3">
+                <select name="categoria" class="form-select">
+                    <option value="">Todas las categorías</option>
+                    {% for cat in categorias %}
+                    <option value="{{ cat.pk }}" {% if categoria_seleccionada == cat.pk|stringformat:"s" %}selected{% endif %}>{{ cat.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="estado" class="form-select">
+                    <option value="">Todos los estados</option>
+                    {% for est in estados %}
+                    <option value="{{ est.pk }}" {% if estado_seleccionado == est.pk|stringformat:"s" %}selected{% endif %}>{{ est.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-sena-naranja w-100">Filtrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Ubicación</th>
+                    <th>Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for activo in activos %}
+                <tr>
+                    <td>{{ activo.codigo_inventario }}</td>
+                    <td>{{ activo.nombre }}</td>
+                    <td>{{ activo.categoria.nombre }}</td>
+                    <td>{{ activo.ubicacion.nombre|default:"Sin asignar" }}</td>
+                    <td><span class="badge" style="background-color: {{ activo.estado.color }};">{{ activo.estado.nombre }}</span></td>
+                    <td>
+                        <a href="{% url 'inventario:activo_detail' activo.pk %}" class="btn btn-sm btn-sena-verde">
+                            <i class="fas fa-eye"></i> Ver detalle
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center text-muted">No se encontraron activos</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if is_paginated %}
+        <nav>
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&search={{ search }}&categoria={{ categoria_seleccionada }}&estado={{ estado_seleccionado }}">Anterior</a></li>
+                {% endif %}
+                <li class="page-item disabled"><span class="page-link">Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span></li>
+                {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&search={{ search }}&categoria={{ categoria_seleccionada }}&estado={{ estado_seleccionado }}">Siguiente</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

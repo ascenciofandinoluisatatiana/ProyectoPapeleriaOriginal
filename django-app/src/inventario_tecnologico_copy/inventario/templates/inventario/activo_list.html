@@ -1,0 +1,304 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Activos - Mi Papelería{% endblock %}
+
+{% block content %}
+
+<div class="page-header papeleria-page-header">
+    <div>
+        <span class="papeleria-eyebrow">
+            <i class="fas fa-box-open"></i> Inventario
+        </span>
+        <h1 class="papeleria-page-title">
+            Mis productos
+            <span class="title-decoration">♡</span>
+        </h1>
+        <p class="papeleria-page-subtitle">
+            Consulta y administra todos los productos de tu papelería.
+        </p>
+    </div>
+
+    <div class="papeleria-page-actions">
+        <a href="{% url 'inventario:exportar_activos_excel' %}"
+           class="btn papeleria-btn-secondary">
+            <i class="fas fa-file-excel"></i>
+            Exportar
+        </a>
+
+        <a href="{% url 'inventario:activo_create' %}"
+           class="btn papeleria-btn-primary">
+            <i class="fas fa-plus"></i>
+            Nuevo producto
+        </a>
+    </div>
+</div>
+
+
+<!-- Filtros -->
+<div class="card papeleria-filter-card mb-4">
+    <div class="card-body">
+
+        <div class="papeleria-section-title">
+            <div class="section-icon">
+                <i class="fas fa-sliders-h"></i>
+            </div>
+            <div>
+                <h5>Buscar productos</h5>
+                <small>Filtra tu inventario por nombre, categoría o estado.</small>
+            </div>
+        </div>
+
+        <form method="get" class="row g-3 align-items-end">
+
+            <div class="col-md-4">
+                <label class="form-label papeleria-label">
+                    Buscar
+                </label>
+
+                <div class="papeleria-input-group">
+                    <i class="fas fa-search"></i>
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control"
+                        placeholder="Código, nombre o marca"
+                        value="{{ search }}">
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label papeleria-label">
+                    Categoría
+                </label>
+
+                <select name="categoria" class="form-select papeleria-select">
+                    <option value="">Todas las categorías</option>
+
+                    {% for cat in categorias %}
+                    <option value="{{ cat.pk }}"
+                        {% if categoria_seleccionada == cat.pk|stringformat:"s" %}selected{% endif %}>
+                        {{ cat.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label class="form-label papeleria-label">
+                    Estado
+                </label>
+
+                <select name="estado" class="form-select papeleria-select">
+                    <option value="">Todos los estados</option>
+
+                    {% for est in estados %}
+                    <option value="{{ est.pk }}"
+                        {% if estado_seleccionado == est.pk|stringformat:"s" %}selected{% endif %}>
+                        {{ est.nombre }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <button type="submit"
+                        class="btn papeleria-filter-btn w-100">
+                    <i class="fas fa-search"></i>
+                    Filtrar
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<!-- Tabla de productos -->
+<div class="card papeleria-products-card">
+
+    <div class="card-body">
+
+        <div class="papeleria-table-header">
+            <div class="papeleria-section-title mb-0">
+                <div class="section-icon section-icon-pink">
+                    <i class="fas fa-boxes"></i>
+                </div>
+
+                <div>
+                    <h5>Productos registrados</h5>
+                    <small>Listado de productos disponibles en el inventario.</small>
+                </div>
+            </div>
+
+            <span class="papeleria-count-badge">
+                {{ activos|length }} productos
+            </span>
+        </div>
+
+
+        <div class="table-responsive papeleria-table-wrapper">
+
+            <table class="table papeleria-table align-middle">
+
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Producto</th>
+                        <th>Categoría</th>
+                        <th>Ubicación</th>
+                        <th>Estado</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for activo in activos %}
+
+                    <tr>
+
+                        <td>
+                            <span class="product-code">
+                                {{ activo.codigo_inventario }}
+                            </span>
+                        </td>
+
+                        <td>
+                            <div class="product-name-cell">
+                                <div class="product-icon">
+                                    <i class="fas fa-box"></i>
+                                </div>
+
+                                <div>
+                                    <strong>{{ activo.nombre }}</strong>
+                                    {% if activo.marca %}
+                                    <small>{{ activo.marca }}</small>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </td>
+
+                        <td>
+                            <span class="category-badge">
+                                <i class="fas fa-tag"></i>
+                                {{ activo.categoria.nombre }}
+                            </span>
+                        </td>
+
+                        <td>
+                            {% if activo.ubicacion %}
+                                <span class="location-text">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    {{ activo.ubicacion.nombre }}
+                                </span>
+                            {% else %}
+                                <span class="text-muted">
+                                    Sin asignar
+                                </span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <span class="status-badge"
+                                  style="--status-color: {{ activo.estado.color }};">
+                                <span class="status-dot"></span>
+                                {{ activo.estado.nombre }}
+                            </span>
+                        </td>
+
+                        <td class="text-end">
+                            <a href="{% url 'inventario:activo_detail' activo.pk %}"
+                               class="btn papeleria-view-btn">
+                                <i class="fas fa-eye"></i>
+                                Ver
+                            </a>
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="6">
+                            <div class="papeleria-empty-state">
+                                <div class="empty-icon">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+
+                                <h5>No encontramos productos</h5>
+
+                                <p>
+                                    No hay activos que coincidan con los filtros seleccionados.
+                                </p>
+
+                                <a href="{% url 'inventario:activo_create' %}"
+                                   class="btn papeleria-btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    Crear producto
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <!-- Paginación -->
+        {% if is_paginated %}
+
+        <div class="papeleria-pagination">
+
+            <div class="pagination-info">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </div>
+
+            <nav aria-label="Paginación de productos">
+
+                <ul class="pagination mb-0">
+
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.previous_page_number }}&search={{ search }}&categoria={{ categoria_seleccionada }}&estado={{ estado_seleccionado }}">
+                            <i class="fas fa-chevron-left"></i>
+                            Anterior
+                        </a>
+                    </li>
+                    {% endif %}
+
+
+                    <li class="page-item active">
+                        <span class="page-link">
+                            {{ page_obj.number }}
+                        </span>
+                    </li>
+
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.next_page_number }}&search={{ search }}&categoria={{ categoria_seleccionada }}&estado={{ estado_seleccionado }}">
+                            Siguiente
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+
+            </nav>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+</div>
+
+{% endblock %}

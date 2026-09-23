@@ -1,0 +1,127 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Iniciar Sesión - Mi Papelería{% endblock %}
+
+{% block content %}
+
+<div class="papeleria-auth-page">
+
+    <div class="papeleria-auth-card">
+
+        <div class="papeleria-auth-decoration">
+            <span>♡</span>
+            <span>✦</span>
+            <span>♡</span>
+        </div>
+
+        <div class="papeleria-auth-icon">
+            <i class="fas fa-user"></i>
+        </div>
+
+        <span class="papeleria-kicker">
+            Bienvenido
+        </span>
+
+        <h1 class="papeleria-auth-title">
+            Iniciar sesión
+        </h1>
+
+        <p class="papeleria-auth-subtitle">
+            Ingresa a tu espacio de gestión de Mi Papelería.
+        </p>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+
+                <div class="papeleria-form-alert">
+
+                    <div class="papeleria-alert-icon">
+                        <i class="fas fa-circle-exclamation"></i>
+                    </div>
+
+                    <div>
+                        {{ form.non_field_errors }}
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+            <div class="mb-4">
+
+                <label for="{{ form.username.id_for_label }}"
+                       class="papeleria-form-label">
+
+                    <i class="fas fa-user"></i>
+                    Usuario
+
+                </label>
+
+                {{ form.username }}
+
+                {% if form.username.errors %}
+
+                    <div class="papeleria-field-error">
+                        {{ form.username.errors }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            <div class="mb-4">
+
+                <label for="{{ form.password.id_for_label }}"
+                       class="papeleria-form-label">
+
+                    <i class="fas fa-lock"></i>
+                    Contraseña
+
+                </label>
+
+                {{ form.password }}
+
+                {% if form.password.errors %}
+
+                    <div class="papeleria-field-error">
+                        {{ form.password.errors }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+            <button type="submit"
+                    class="papeleria-btn papeleria-btn-primary papeleria-auth-submit">
+
+                <i class="fas fa-right-to-bracket"></i>
+                Iniciar sesión
+
+            </button>
+
+        </form>
+
+        <div class="papeleria-auth-divider">
+            <span></span>
+            <small>o</small>
+            <span></span>
+        </div>
+
+        <p class="papeleria-auth-register">
+
+            ¿No tienes cuenta?
+
+            <a href="{% url 'inventario:registro' %}">
+                Regístrate aquí
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

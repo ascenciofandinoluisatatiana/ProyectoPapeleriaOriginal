@@ -1,0 +1,117 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Eliminar {{ object.nombre }} - Mi Papelería{% endblock %}
+
+{% block content %}
+
+<div class="papeleria-delete-page">
+
+    <div class="papeleria-delete-card">
+
+        <div class="papeleria-delete-icon">
+            <i class="fas fa-trash"></i>
+        </div>
+
+        <span class="papeleria-kicker papeleria-delete-kicker">
+            Confirmación
+        </span>
+
+        <h1 class="papeleria-delete-title">
+            ¿Eliminar este producto?
+        </h1>
+
+        <p class="papeleria-delete-subtitle">
+            Estás a punto de eliminar un producto del inventario.
+        </p>
+
+        <div class="papeleria-delete-warning">
+
+            <div class="papeleria-warning-icon">
+                <i class="fas fa-triangle-exclamation"></i>
+            </div>
+
+            <div>
+                <strong>Esta acción no se puede deshacer.</strong>
+
+                <p>
+                    Todos los datos asociados a este producto se eliminarán permanentemente.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="papeleria-delete-product">
+
+            <div class="papeleria-delete-product-icon">
+                <i class="fas fa-box"></i>
+            </div>
+
+            <div class="papeleria-delete-product-info">
+
+                <span>Producto seleccionado</span>
+
+                <strong>
+                    {{ object.nombre }}
+                </strong>
+
+                <small>
+                    {{ object.codigo_inventario }}
+                </small>
+
+            </div>
+
+        </div>
+
+        <div class="papeleria-delete-details">
+
+            <div>
+                <span>Categoría</span>
+                <strong>{{ object.categoria.nombre }}</strong>
+            </div>
+
+            <div>
+                <span>Estado</span>
+                <strong>{{ object.estado.nombre }}</strong>
+            </div>
+
+            <div>
+                <span>Ubicación</span>
+                <strong>{{ object.ubicacion.nombre|default:"N/A" }}</strong>
+            </div>
+
+            {% if object.valor_adquisicion %}
+            <div>
+                <span>Valor</span>
+                <strong>${{ object.valor_adquisicion|floatformat:0 }}</strong>
+            </div>
+            {% endif %}
+
+        </div>
+
+        <form method="post" class="papeleria-delete-actions">
+
+            {% csrf_token %}
+
+            <a href="{% url 'inventario:activo_detail' object.pk %}"
+               class="papeleria-btn papeleria-btn-light">
+
+                <i class="fas fa-arrow-left"></i>
+                Cancelar
+
+            </a>
+
+            <button type="submit"
+                    class="papeleria-btn papeleria-btn-danger">
+
+                <i class="fas fa-trash"></i>
+                Sí, eliminar producto
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

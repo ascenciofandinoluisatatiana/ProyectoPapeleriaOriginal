@@ -1,0 +1,150 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Ubicaciones - Mi Papelería{% endblock %}
+
+{% block content %}
+
+<div class="papeleria-page-header">
+
+    <div>
+
+        <span class="papeleria-kicker">
+            <i class="fas fa-map-marker-alt"></i>
+            Organización
+        </span>
+
+        <h1 class="papeleria-page-title">
+            Mis ubicaciones
+            <span class="title-decoration">♡</span>
+        </h1>
+
+        <p class="papeleria-page-subtitle">
+            Consulta los espacios donde se encuentran almacenados tus productos.
+        </p>
+
+    </div>
+
+</div>
+
+<div class="papeleria-category-card">
+
+    <div class="papeleria-category-header">
+
+        <div class="papeleria-section-title mb-0">
+
+            <div class="section-icon section-icon-mint">
+                <i class="fas fa-location-dot"></i>
+            </div>
+
+            <div>
+                <h5>Ubicaciones registradas</h5>
+                <small>
+                    Distribución de productos dentro de la papelería.
+                </small>
+            </div>
+
+        </div>
+
+        <span class="papeleria-count-badge">
+            {{ ubicaciones|length }} ubicaciones
+        </span>
+
+    </div>
+
+    <div class="table-responsive papeleria-table-wrapper">
+
+        <table class="table papeleria-table align-middle">
+
+            <thead>
+
+                <tr>
+                    <th>Código</th>
+                    <th>Ubicación</th>
+                    <th>Tipo</th>
+                    <th>Productos</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for ubi in ubicaciones %}
+
+                <tr>
+
+                    <td>
+                        <span class="category-code">
+                            {{ ubi.codigo }}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="category-name-cell">
+
+                            <div class="category-icon category-icon-mint">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+
+                            <strong>
+                                {{ ubi.nombre }}
+                            </strong>
+
+                        </div>
+
+                    </td>
+
+                    <td>
+
+                        <span class="location-type-badge">
+                            {{ ubi.get_tipo_display }}
+                        </span>
+
+                    </td>
+
+                    <td>
+
+                        <span class="category-count category-count-mint">
+                            <i class="fas fa-box"></i>
+                            {{ ubi.cantidad_activos }}
+                        </span>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="4">
+
+                        <div class="papeleria-empty-state">
+
+                            <div class="empty-icon location-empty-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+
+                            <h5>No hay ubicaciones registradas</h5>
+
+                            <p>
+                                Todavía no hay espacios registrados en el sistema.
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

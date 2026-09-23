@@ -1,0 +1,44 @@
+{% extends 'inventario/base.html' %}
+
+{% block title %}Detalle de Auditoría{% endblock %}
+
+{% block content %}
+<div class="page-header d-flex justify-content-between">
+    <h1><i class="fas fa-clipboard-list"></i> Detalle de Auditoría</h1>
+    <a href="{% url 'inventario:log_list' %}" class="btn btn-secondary">Volver</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Fecha:</strong> {{ log.fecha_hora|date:"d/m/Y H:i:s" }}</p>
+                <p><strong>Usuario:</strong> {{ log.usuario_nombre }}</p>
+                <p><strong>Acción:</strong> {{ log.get_accion_display }}</p>
+                <p><strong>Modelo afectado:</strong> {{ log.modelo }}</p>
+                <p><strong>Objeto:</strong> {{ log.objeto_repr|default:"N/A" }}</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>IP:</strong> {{ log.ip_address|default:"N/A" }}</p>
+                <p><strong>Navegador:</strong> {{ log.user_agent|truncatechars:60|default:"N/A" }}</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <p><strong>Descripción:</strong> {{ log.descripcion }}</p>
+
+        <!-- Solo aparece en acciones UPDATE -->
+        {% if log.datos_anteriores %}
+        <h5 class="mt-4">Datos Anteriores</h5>
+        <pre class="bg-light p-3">{{ log.datos_anteriores }}</pre>
+        {% endif %}
+
+        <!-- Aparece en CREATE y UPDATE -->
+        {% if log.datos_nuevos %}
+        <h5 class="mt-4">Datos Nuevos</h5>
+        <pre class="bg-light p-3">{{ log.datos_nuevos }}</pre>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
